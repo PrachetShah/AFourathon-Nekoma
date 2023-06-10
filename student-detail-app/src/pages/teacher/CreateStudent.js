@@ -1,6 +1,6 @@
 import React from "react";
 import Delete from "./components/Delete";
-import Update from "./components/Update";
+
 
 export default function CreateStudent() {
     return (
@@ -11,7 +11,6 @@ export default function CreateStudent() {
                     Student Email
                     Student Phone Number</p>
                     <Delete/>
-                    <Update/>
             </div>
         </>
     )

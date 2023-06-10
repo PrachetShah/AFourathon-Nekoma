@@ -7,6 +7,7 @@ import TeacherLogin from './auth/TeacherLogin';
 import TeacherRegister from './auth/TeacherRegister';
 import Navbar from './components/Navbar/Navbar';
 import CreateStudent from './pages/teacher/CreateStudent';
+import AllRecords from './pages/teacher/AllRecords';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" exact element={<><TeacherLogin/></>} />
         <Route path="/register" exact element={<><TeacherRegister/></>} />
         <Route path="/studentDetail" exact element={<><CreateStudent/></>} />
+        <Route path="/allRecords" exact element={<><AllRecords/></>} />
         </Routes>
       </Router>
     </div>
