@@ -3,11 +3,13 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///library.db'  # SQLite database file
 db = SQLAlchemy(app)
+CORS(app)
 
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
