@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 
 const theme = createTheme();
 
-export default function TeacherLogin() {
+export default function TeacherRegister() {
   const [setLoading] = useState(true);
 
   const [values, setValues] = useState({
@@ -65,12 +65,12 @@ export default function TeacherLogin() {
         }
       );
       console.log(result.data);
-      if (result.data.allow === true) {
-        Swal.fire("Logged in Successfully!", "success", "success");
+      if (result.data.message === "User created successfully") {
+        Swal.fire("Registered Successfully!", "success", "success");
         sessionStorage.setItem("token", result.data.token);
         history("/");
       } else {
-        Swal.fire("Oops!!", "Some error while login", "error");
+        Swal.fire("Oops!!", "Some error occurred during registration", "error");
       }
     } catch (error) {
       console.log("Error" + error);
