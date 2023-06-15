@@ -15,10 +15,10 @@ function App() {
       <Router>
         <Routes>
         <Route path="/home" exact element={<><Homepage/></>} />
-        <Route path="/login" exact element={<><TeacherLogin/></>} />
+        <Route path="/login" exact element={<><Navbar/><TeacherLogin/></>} />
         <Route path="/register" exact element={<><TeacherRegister/></>} />
         <Route path="/studentDetail" exact element={<><CreateStudent/></>} />
-        <Route path="/allRecords" exact element={<><AllRecords/></>} />
+        <Route path="/allRecords" exact element={<><Navbar/><AllRecords/></>} />
         </Routes>
       </Router>
     </div>
