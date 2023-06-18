@@ -1,9 +1,9 @@
 import React from "react";
 import Delete from "./components/Delete";
 import { useState } from "react";
-import { Grid, Typography, TextField, Button, Box } from "@mui/material";
+import { Grid, Typography, TextField, Button, Box, Snackbar, IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Clear';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Swal from "sweetalert2";
 import axios from "axios";
 import { url } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,9 @@ import { useNavigate } from "react-router-dom";
 const theme = createTheme();
 
 export default function CreateStudent() {
-    // const [setLoading] = useState(true);
+
+    const [errorMessage, setErrorMessage] = useState(""); //for alert
+    const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
         id: "",
         name: "",
@@ -26,6 +28,11 @@ export default function CreateStudent() {
         console.log(values);
     };
     const history = useNavigate();
+    const handleToClose = (event, reason) => {
+        if ("clickaway" === reason) return;
+        setOpen(false);
+        history("/allRecords")
+    };
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -55,16 +62,17 @@ export default function CreateStudent() {
                 }
             );
             console.log(result.data);
-            if (result.data.allow === true) {
-                Swal.fire("Student account created successfully!", "success", "success");
+            if (result.data.message === "Student created successfully") {
+                setErrorMessage('Student log created');
+                setOpen(true);
                 sessionStorage.setItem("token", result.data.token);
-                history("/allRecords");
+
             } else {
-                Swal.fire("Oops!!", "Some error while filling details", "error");
+                setErrorMessage('Please fill all details');
             }
         } catch (error) {
             console.log("Error" + error);
-            //setLoading(false);
+
         }
     }
 
@@ -88,9 +96,21 @@ export default function CreateStudent() {
                         style={{ marginTop: "20px", marginLeft: "36px" }}
                     >
                         <Typography style={{ fontSize: "30px" }}>
-                            Create a Member Log
+                            Create a Student Log
                         </Typography>
                     </Grid>
+                    {errorMessage && <Snackbar open={open} message={errorMessage} onClose={handleToClose} action={
+                        <React.Fragment>
+                            <IconButton
+                                size="small"
+                                aria-label="close"
+                                color="inherit"
+                                onClick={handleToClose}
+                            >
+                                <p>View</p>
+                            </IconButton>
+                        </React.Fragment>
+                    } />}
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
                         {/* <Grid container marginBottom={5}>
                             
