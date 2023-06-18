@@ -2,7 +2,7 @@ import React from "react";
 import Delete from "./components/Delete";
 import { useState } from "react";
 import { Grid, Typography, TextField, Button, Box, Snackbar, IconButton } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Clear';
+import FileInput from "./components/FileInput";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { url } from "../../utils/api";
@@ -111,6 +111,7 @@ export default function CreateStudent() {
                             </IconButton>
                         </React.Fragment>
                     } />}
+                    <FileInput/>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
                         {/* <Grid container marginBottom={5}>
                             
