@@ -4,7 +4,6 @@ import { url } from '../../../utils/api';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Snackbar, IconButton, Button } from "@mui/material";
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import './FileInput.css';
 
 export default function FileInput() {

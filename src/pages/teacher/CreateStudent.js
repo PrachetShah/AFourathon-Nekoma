@@ -5,7 +5,7 @@ import FileInput from "./components/FileInput";
 import axios from "axios";
 import { url } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
-
+import img from './createstudent.svg';
 
 export default function CreateStudent() {
 
@@ -77,6 +77,10 @@ export default function CreateStudent() {
     return (
         <>
             <div>
+                {/* <Grid container direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="flex"> */}
+
                 <Grid
                     container
                     direction="row"
@@ -108,7 +112,7 @@ export default function CreateStudent() {
                             </IconButton>
                         </React.Fragment>
                     } />}
-
+                    <img style={{ width: "400px", height: "400px" }} src={img} />
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
                         <FileInput />
                         <Grid container direction="row"
@@ -183,6 +187,7 @@ export default function CreateStudent() {
                         </Grid>
                     </Box>
                 </Grid>
+                {/* </Grid> */}
             </div>
         </>
     )
