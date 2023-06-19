@@ -11,11 +11,6 @@ export default function FileInput() {
     const [errorMessage, setErrorMessage] = useState(""); //for alert
     const [open, setOpen] = useState(false);
     const history = useNavigate();
-    const addIcon = {
-        width: '50px',
-        height: '50px',
-        display: 'block',
-    };
 
     const handleToClose = (event, reason) => {
         if ("clickaway" === reason) return;

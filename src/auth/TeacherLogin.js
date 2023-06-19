@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -9,17 +9,16 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import axios from "axios"; 
-import {url} from "../utils/api";
+import axios from "axios";
+import { url } from "../utils/api";
 import { Link } from "react-router-dom";
+import { Snackbar, IconButton } from "@mui/material";
 
 const theme = createTheme();
-
 export default function TeacherLogin() {
-  const [setLoading] = useState(true);
-
+  const [errorMessage, setErrorMessage] = useState(""); //for alert
+  const [open, setOpen] = useState(false);
   const [values, setValues] = useState({
     password: "",
     email: "",
@@ -36,7 +35,11 @@ export default function TeacherLogin() {
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
+  const handleToClose = (event, reason) => {
+    if ("clickaway" === reason) return;
+    setOpen(false);
 
+  };
   const history = useNavigate();
 
   const handleSubmit = (event) => {
@@ -52,7 +55,7 @@ export default function TeacherLogin() {
   async function createacc() {
     try {
       let result = await axios.post(
-        url+"login",
+        url + "login",
         {
           password: values.password,
           email: values.email,
@@ -65,16 +68,20 @@ export default function TeacherLogin() {
         }
       );
       console.log(result.data);
-      if (result.data.allow === true) {
-        Swal.fire("Logged in Successfully!", "success", "success");
-        sessionStorage.setItem("token", result.data.token);
+      //console.log(result.response.status)
+      if (result.data.message === "Allow Access") {
+        setErrorMessage('Logged in');
+        setOpen(true);
         history("/");
-      } else {
-        Swal.fire("Oops!!", "Some error while login", "error");
+        sessionStorage.setItem("token", result.data.token);
       }
     } catch (error) {
       console.log("Error" + error);
-      setLoading(false);
+      if (error.response.status === "401" || error.response.status === "404") {
+        console.log(error.response.status)
+        setErrorMessage('Please fill all details correctly');
+        setOpen(true);
+      }
     }
   }
 
@@ -115,6 +122,18 @@ export default function TeacherLogin() {
             <Typography component="h1" variant="h5">
               Login
             </Typography>
+            {errorMessage && <Snackbar open={open} message={errorMessage} onClose={handleToClose} action={
+              <React.Fragment>
+                <IconButton
+                  size="small"
+                  aria-label="close"
+                  color="inherit"
+                  onClick={handleToClose}
+                >
+
+                </IconButton>
+              </React.Fragment>
+            } />}
             <Box
               component="form"
               noValidate
