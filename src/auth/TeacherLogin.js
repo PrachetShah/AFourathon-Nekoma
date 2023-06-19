@@ -14,6 +14,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import axios from "axios"; 
 import {url} from "../utils/api";
 import { Link } from "react-router-dom";
+import login from "../assets/login.svg";
 
 const theme = createTheme();
 
@@ -88,8 +89,7 @@ export default function TeacherLogin() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage:
-              "url(https://img.freepik.com/premium-vector/id-smartphone-learning-metaverse-technology-3d-space-universes-simulation-interface_251139-314.jpg?w=1060)",
+            backgroundImage:"url(../assets/login.svg)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"

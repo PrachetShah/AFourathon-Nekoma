@@ -1,20 +1,20 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 
 import Paper from "@mui/material/Paper";
 import Delete from "./components/Delete";
 import Update from "./components/Update";
 import CreateStudent from "./CreateStudent";
 import axios from "axios";
-import {url} from "../../utils/api";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { url } from "../../utils/api";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const columns = [
   { field: "id", headerName: "Student Id", width: 220 },
@@ -38,22 +38,21 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
+  "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
-
 
 export default function AllRecords() {
   const [rows, setRows] = React.useState([]);
 
   React.useEffect(() => {
     axios
-      .get(url+"getStudents")
+      .get(url + "getStudents")
       .then((response) => {
         setRows(response.data);
       })
@@ -69,7 +68,7 @@ export default function AllRecords() {
         setRows((prevRows) => prevRows.filter((row) => row.id !== id));
       })
       .catch((error) => {
-        console.error('Error deleting student:', error);
+        console.error("Error deleting student:", error);
       });
   };
 
@@ -77,23 +76,31 @@ export default function AllRecords() {
     const handleClick = () => {
       handleDelete(id);
     };
-  
+
     return (
-      <DeleteIcon onClick={handleClick} style={{cursor:"pointer"}}></DeleteIcon>
+      <DeleteIcon
+        onClick={handleClick}
+        style={{ cursor: "pointer" }}
+      ></DeleteIcon>
     );
   }
 
   return (
     <div
-      style={{ height: 650, width: "80%", marginLeft: "10%", marginTop: "0.5%" }}
+      style={{
+        height: 650,
+        width: "80%",
+        marginLeft: "10%",
+        marginTop: "0.5%",
+      }}
     >
       <DataGrid
         rows={rows}
         columns={[
           ...columns,
           {
-            field: 'delete',
-            headerName: 'Delete',
+            field: "delete",
+            headerName: "Delete",
             width: 120,
             renderCell: (params) => (
               <Delete id={params.row.id} handleDelete={handleDelete} />
