@@ -9,17 +9,17 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import axios from "axios"; 
-import {url} from "../utils/api";
+import axios from "axios";
+import { url } from "../utils/api";
 import { Link } from "react-router-dom";
+import { Snackbar, IconButton } from "@mui/material";
 
 const theme = createTheme();
 
 export default function TeacherRegister() {
-  const [setLoading] = useState(true);
-
+  const [errorMessage, setErrorMessage] = useState(""); //for alert
+  const [open, setOpen] = useState(false);
   const [values, setValues] = useState({
     password: "",
     email: "",
@@ -32,7 +32,10 @@ export default function TeacherRegister() {
     });
     console.log(values);
   };
-
+  const handleToClose = (event, reason) => {
+    if ("clickaway" === reason) return;
+    setOpen(false);
+  };
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -52,7 +55,7 @@ export default function TeacherRegister() {
   async function createacc() {
     try {
       let result = await axios.post(
-        url+"register",
+        url + "register",
         {
           password: values.password,
           email: values.email,
@@ -65,16 +68,19 @@ export default function TeacherRegister() {
         }
       );
       console.log(result.data);
-      if (result.data.message === "User created successfully") {
-        Swal.fire("Registered Successfully!", "success", "success");
+      if (result.data.message === "Admin created successfully") {
+        setErrorMessage('Registration successful');
+        setOpen(true);
         sessionStorage.setItem("token", result.data.token);
-        history("/");
-      } else {
-        Swal.fire("Oops!!", "Some error occurred during registration", "error");
+        history("/")
       }
     } catch (error) {
       console.log("Error" + error);
-      setLoading(false);
+      if (error.response.status === "401") {
+        console.log(error.response.status)
+        setErrorMessage('Email already registered');
+        setOpen(true);
+      }
     }
   }
 
@@ -115,6 +121,18 @@ export default function TeacherRegister() {
             <Typography component="h1" variant="h5">
               Sign Up
             </Typography>
+            {errorMessage && <Snackbar open={open} message={errorMessage} onClose={handleToClose} action={
+              <React.Fragment>
+                <IconButton
+                  size="small"
+                  aria-label="close"
+                  color="inherit"
+                  onClick={handleToClose}
+                >
+
+                </IconButton>
+              </React.Fragment>
+            } />}
             <Box
               component="form"
               noValidate

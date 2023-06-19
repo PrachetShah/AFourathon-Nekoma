@@ -1,14 +1,11 @@
 import React from "react";
-import Delete from "./components/Delete";
 import { useState } from "react";
 import { Grid, Typography, TextField, Button, Box, Snackbar, IconButton } from "@mui/material";
 import FileInput from "./components/FileInput";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { url } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
-
-const theme = createTheme();
+import img from './createstudent.svg';
 
 export default function CreateStudent() {
 
@@ -80,23 +77,27 @@ export default function CreateStudent() {
     return (
         <>
             <div>
+                {/* <Grid container direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="flex"> */}
+
                 <Grid
                     container
-                    direction="column"
+                    direction="row"
                     justifyContent="space-evenly"
-                    alignItems="flex-start"
+                    alignItems="flex"
                     style={{ gap: 15 }}
                 >
                     <Grid
                         item
                         xs={12}
                         sm={12}
-                        md={6}
-                        lg={6}
-                        style={{ marginTop: "20px", marginLeft: "36px" }}
+                        md={12}
+                        lg={12}
+                        style={{ marginTop: "10px", marginLeft: "36px" }}
                     >
-                        <Typography style={{ fontSize: "30px" }}>
-                            Create a Student Log
+                        <Typography style={{ fontWeight: "800", fontSize: "30px" }}>
+                            Add Students
                         </Typography>
                     </Grid>
                     {errorMessage && <Snackbar open={open} message={errorMessage} onClose={handleToClose} action={
@@ -111,75 +112,82 @@ export default function CreateStudent() {
                             </IconButton>
                         </React.Fragment>
                     } />}
-                    <FileInput/>
+                    <img style={{ width: "400px", height: "400px" }} src={img} />
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
-                        {/* <Grid container marginBottom={5}>
-                            
+                        <FileInput />
+                        <Grid container direction="row"
+                            justifyContent="space-evenly"
+                            alignItems="flex-start" marginBottom={1}>
 
-                        </Grid> */}
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="id"
-                            label="Student ID"
-                            name="id"
-                            value={values.id}
-                            onChange={handleChanges}
-                            autoComplete="id"
-                            autoFocus
-                            color="secondary"
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="name"
-                            label="Name"
-                            name="name"
-                            value={values.name}
-                            onChange={handleChanges}
-                            autoComplete="name"
-                            autoFocus
-                            color="secondary"
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email"
-                            name="email"
-                            value={values.email}
-                            onChange={handleChanges}
-                            autoComplete="email"
-                            autoFocus
-                            color="secondary"
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="number"
-                            label="Number"
-                            name="number"
-                            value={values.number}
-                            onChange={handleChanges}
-                            autoComplete="number"
-                            autoFocus
-                            color="secondary"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 5, mb: 3 }}
-                            color="secondary"
-                        >
-                            Create Record
-                        </Button>
+                            <div style={{ fontWeight: "700", fontSize: "23px" }}>Add individual student record</div>
+                        </Grid>
+                        <Grid
+                            container direction="column"
+                            justifyContent="space-evenly"
+                            alignItems="flex-start" marginBottom={1}>
+                            <TextField
+                                margin="normal"
+                                required
+                                style={{ boxColor: "black", width: "60vh" }}
+                                id="id"
+                                label="Student ID"
+                                name="id"
+                                value={values.id}
+                                onChange={handleChanges}
+                                autoComplete="id"
+                                autoFocus
+
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                style={{ boxColor: "black", width: "60vh" }}
+                                id="name"
+                                label="Name"
+                                name="name"
+                                value={values.name}
+                                onChange={handleChanges}
+                                autoComplete="name"
+                                autoFocus
+
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                style={{ boxColor: "black", width: "60vh" }}
+                                id="email"
+                                label="Email"
+                                name="email"
+                                value={values.email}
+                                onChange={handleChanges}
+                                autoComplete="email"
+                                autoFocus
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+
+                                id="number"
+                                label="Number"
+                                name="number"
+                                value={values.number}
+                                onChange={handleChanges}
+                                autoComplete="number"
+                                autoFocus
+                                style={{ boxColor: "black", width: "60vh" }}
+                            />
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                sx={{ mt: 5, ml: 20 }}
+                                style={{ backgroundColor: "black", color: "white" }}
+                            >
+                                Create Record
+                            </Button>
+                        </Grid>
                     </Box>
                 </Grid>
+                {/* </Grid> */}
             </div>
         </>
     )
