@@ -3,12 +3,20 @@ import axios from "axios";
 import { url } from '../../../utils/api';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Grid, Typography, TextField, Button, Box, Snackbar, IconButton } from "@mui/material";
+import { Snackbar, IconButton, Button } from "@mui/material";
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import './FileInput.css';
 
 export default function FileInput() {
+
     const [errorMessage, setErrorMessage] = useState(""); //for alert
     const [open, setOpen] = useState(false);
     const history = useNavigate();
+    const addIcon = {
+        width: '50px',
+        height: '50px',
+        display: 'block',
+    };
 
     const handleToClose = (event, reason) => {
         if ("clickaway" === reason) return;
@@ -49,8 +57,17 @@ export default function FileInput() {
         }
     }
     return (
+
         <div>
-            <input type="file" onChange={handleSubmit} />
+            <span style={{ fontWeight: "700", fontSize: "23px" }}>Add students via csv file </span>
+            <Button
+                variant="contained"
+                style={{ marginLeft: "2px", backgroundColor: "black", color: "white" }}>
+                <label style={{ cursor: "pointer" }} htmlFor="input-img">Upload</label>
+                <input type="file" id="input-img" onChange={handleSubmit} />
+            </Button>
+            <div style={{ fontWeight: "700", fontSize: "23px" }}>OR</div>
+            {/* <input class="custom-file-input" type="file" onChange={handleSubmit} /> */}
             {errorMessage && <Snackbar open={open} message={errorMessage} onClose={handleToClose} action={
                 <React.Fragment>
                     <IconButton

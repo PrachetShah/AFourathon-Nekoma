@@ -23,18 +23,18 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="navbar-item">
-              <Link to="/about" className="navbar-link" onClick={toggleNavbar}>
-                About
+              <Link to="/allRecords" className="navbar-link" onClick={toggleNavbar}>
+                All Records
               </Link>
             </li>
             <li className="navbar-item">
-              <Link to="/services" className="navbar-link" onClick={toggleNavbar}>
-                Services
+              <Link to="/studentDetail" className="navbar-link" onClick={toggleNavbar}>
+                Add Students
               </Link>
             </li>
             <li className="navbar-item">
-              <Link to="/contact" className="navbar-link" onClick={toggleNavbar}>
-                Contact
+              <Link to="/logout" className="navbar-link" onClick={toggleNavbar}>
+                Logout
               </Link>
             </li>
           </ul>

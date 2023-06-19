@@ -9,7 +9,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 import Paper from "@mui/material/Paper";
-import Delete from "./components/Delete";
 import Update from "./components/Update";
 import CreateStudent from "./CreateStudent";
 import axios from "axios";
