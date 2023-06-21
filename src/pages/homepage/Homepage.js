@@ -1,6 +1,6 @@
 import { Grid, Button, Typography } from "@mui/material";
 import "./Homepage.css";
-
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 export default function HomePage() {
   return (
     <>
@@ -14,34 +14,37 @@ export default function HomePage() {
         <Grid item sm={6} md={3} className="left-box">
           <div className="text">
             <Grid item sm={6} md={3}>
-              <Typography
+            <Typography
                 style={{
-                  fontSize: "5rem",
-                  letterSpacing: 1,
-                  fontFamily: "Roboto",
+                  fontSize: "1rem",
+                  textTransform:"uppercase",
+                  color:"#5E6282"
                 }}
               >
-                MedCare
+                Welcome to
+              </Typography>
+              <Typography
+              className="heading"
+              >
+                Student Portal
               </Typography>
             </Grid>
             <br />
             <Grid item sm={6} md={12}>
-              <Typography style={{ fontFamily: "Roboto", fontSize: "1.5rem", paddingBottom:"20px" }}>
-                Our emotions can trigger all sorts of behaviors— uncontrollable
-                anger, crying spells, self-loathing, and other not-so-positive
-                reactions. Managing your emotions takes a dose of willpower,
-                plenty of awareness, lots of resilience, among other self-care
-                tools. Are you ready to build your own emotional toolkit? Here
-                is what you can do:{" "}
+              <Typography style={{ fontSize: "1.5rem", paddingBottom:"20px",color:"#5E6282" }}>
+              In this student portal, you can access various features such as
+            viewing your course materials, submitting assignments, checking
+            grades, and more. Take full advantage of the resources available
+            here and make the most out of your learning journey!
               </Typography>
             </Grid>
             <br />
             <Grid item sm={6} md={3}>
               <Button
-                style={{ borderRadius: "31px", backgroundColor: "#49AB94", fontSize:"1.2rem", height:"4rem" }}
+                style={{ borderRadius: "31px", backgroundColor: "#000000", fontSize:"1.2rem", height:"4rem",padding:"20%" }}
                 variant="contained"
               >
-                Explore
+                Explore&nbsp;<ArrowForwardIcon/>
               </Button>
             </Grid>
           </div>

@@ -14,6 +14,7 @@ import axios from "axios";
 import { url } from "../utils/api";
 import { Link } from "react-router-dom";
 import { Snackbar, IconButton } from "@mui/material";
+import login from "../assets/login.svg";
 
 const theme = createTheme();
 
@@ -94,8 +95,7 @@ export default function TeacherRegister() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage:
-              "url(https://img.freepik.com/premium-vector/id-smartphone-learning-metaverse-technology-3d-space-universes-simulation-interface_251139-314.jpg?w=1060)",
+            backgroundImage: `url(${login})`,   
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -115,7 +115,7 @@ export default function TeacherRegister() {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 1, bgcolor: 'black' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -150,7 +150,6 @@ export default function TeacherRegister() {
                 onChange={handleChanges}
                 autoComplete="email"
                 autoFocus
-                color="secondary"
               />
               <TextField
                 margin="normal"
@@ -163,7 +162,6 @@ export default function TeacherRegister() {
                 value={values.password.trim()}
                 onChange={handleChange("password")}
                 autoComplete="current-password"
-                color="secondary"
                 sx={{ mt: 3 }}
               />
               <Button
@@ -171,11 +169,11 @@ export default function TeacherRegister() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 5, mb: 3 }}
-                color="secondary"
+                style={{ backgroundColor: "black", color: "white" }}
               >
                 Signup
               </Button>
-              <Link to="/login">Already have an account? Login</Link>
+              <Link to="/login" style={{color:"black"}}>Already have an account? Login</Link>
             </Box>
           </Box>
         </Grid>

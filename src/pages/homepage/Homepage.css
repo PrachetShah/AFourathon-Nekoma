@@ -6,16 +6,16 @@
     background-size: cover;
     overflow:hidden;
     background-position: center;
-    background-position-x: 5rem;
-    background-position-y: -9rem;
+    background-position-x: 4rem;
+    background-position-y: -1rem;
 }
 .left-box{
     min-height: 80vh;
     min-width: 45vw;
     display: flex;
-    justify-content: center;
     align-items: center;
     padding-left: 5rem;
+    font-family: 'Montserrat', sans-serif !important;
 }
 .text{
     align-items: center;
@@ -53,6 +53,12 @@
         background-position-x: 5rem;
         background-position-y: -7rem;
     }
+}
+.heading{
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 5rem !important;
+    line-height: normal !important;
 }
 @media screen  and (max-width: 900px){
     .right-box{

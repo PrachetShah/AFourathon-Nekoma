@@ -96,7 +96,7 @@ export default function TeacherLogin() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage:"url(../assets/login.svg)",
+            backgroundImage: `url(${login})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -116,7 +116,7 @@ export default function TeacherLogin() {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 1, bgcolor: 'black' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -130,7 +130,6 @@ export default function TeacherLogin() {
                   color="inherit"
                   onClick={handleToClose}
                 >
-
                 </IconButton>
               </React.Fragment>
             } />}
@@ -151,7 +150,6 @@ export default function TeacherLogin() {
                 onChange={handleChanges}
                 autoComplete="email"
                 autoFocus
-                color="secondary"
               />
               <TextField
                 margin="normal"
@@ -164,7 +162,6 @@ export default function TeacherLogin() {
                 value={values.password.trim()}
                 onChange={handleChange("password")}
                 autoComplete="current-password"
-                color="secondary"
                 sx={{ mt: 3 }}
               />
               <Button
@@ -172,11 +169,11 @@ export default function TeacherLogin() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 5, mb: 3 }}
-                color="secondary"
+                style={{ backgroundColor: "black", color: "white" }}
               >
                 Login
               </Button>
-              <Link to="/register">Don't have an account? Sign Up</Link>
+              <Link to="/register" style={{color:"black"}}>Don't have an account? Sign Up</Link>
             </Box>
           </Box>
         </Grid>

@@ -136,7 +136,6 @@ export default function CreateStudent() {
                                 onChange={handleChanges}
                                 autoComplete="id"
                                 autoFocus
-
                             />
                             <TextField
                                 margin="normal"
@@ -148,8 +147,6 @@ export default function CreateStudent() {
                                 value={values.name}
                                 onChange={handleChanges}
                                 autoComplete="name"
-                                autoFocus
-
                             />
                             <TextField
                                 margin="normal"
@@ -161,19 +158,16 @@ export default function CreateStudent() {
                                 value={values.email}
                                 onChange={handleChanges}
                                 autoComplete="email"
-                                autoFocus
                             />
                             <TextField
                                 margin="normal"
                                 required
-
                                 id="number"
                                 label="Number"
                                 name="number"
                                 value={values.number}
                                 onChange={handleChanges}
                                 autoComplete="number"
-                                autoFocus
                                 style={{ boxColor: "black", width: "60vh" }}
                             />
                             <Button
