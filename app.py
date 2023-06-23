@@ -8,13 +8,22 @@ from flask_cors import CORS
 import pandas as pd
 import os
 
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+
 UPLOAD_FOLDER = os.getcwd()+'/static'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config["JWT_SECRET_KEY"] = "lets-keep-it-hello" 
+jwt = JWTManager(app)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///library.db'  # SQLite database file
 db = SQLAlchemy(app)
+
 CORS(app)
 
 class Admin(db.Model):
@@ -84,9 +93,8 @@ def login_user():
         return jsonify({'message': 'User does not exist, Register now'}), 404
 
     if check_password_hash(user.password, data['password']):
-        allow = check_password_hash(user.password, data['password'])
-        response = {'message': 'Allow Access', 'email': email, 'allow': allow}
-        return jsonify(response), 200
+        access_token = create_access_token(identity=email)
+        return jsonify(access_token=access_token), 200
     else:
         allow = check_password_hash(user.password, data['password'])
         response = {'message': 'Wrong Credentials, check Password/Email', 'email': email, 'allow': allow}
@@ -94,7 +102,9 @@ def login_user():
     
 
 @app.route('/getAdmins')
+@jwt_required()
 def get_admins():
+    current_user = get_jwt_identity()
     users = Admin.query.all()
     user_list = []
     for user in users:
@@ -110,6 +120,7 @@ def get_admins():
 
 # STUDENT
 @app.route('/registerStudent', methods=['POST'])
+@jwt_required()
 def create_student():
     data = request.get_json()
     id = data['id']
@@ -127,6 +138,7 @@ def create_student():
 
 
 @app.route('/registerBulk', methods=['POST'])
+@jwt_required()
 def create_students():
     data = request.files['file']
     name = secure_filename(data.filename)
@@ -160,6 +172,7 @@ def create_students():
 
 
 @app.route('/getStudents')
+@jwt_required()
 def get_students():
     users = Student.query.all()
     user_list = []
@@ -177,6 +190,7 @@ def get_students():
 
 
 @app.route('/student/<int:user_id>', methods=['PUT'])
+@jwt_required()
 def edit_user(user_id):
     user = Student.query.get(user_id)
 
