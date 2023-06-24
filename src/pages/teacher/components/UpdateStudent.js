@@ -15,7 +15,7 @@ export default function UpdateStudent(idd, namee, emaill, numberr) {
     const [email, setEmail] = useState(null);
     const [number, setNumber] = useState(null);
     const history = useNavigate();
-
+    console.log(idd, namee, emaill, numberr)
     const handleToClose = (event, reason) => {
         if ("clickaway" === reason) return;
         setOpen(false);

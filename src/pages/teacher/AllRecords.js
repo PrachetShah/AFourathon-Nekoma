@@ -124,7 +124,7 @@ export default function AllRecords() {
             headerName: "Update",
             width: 120,
             renderCell: (params) => (
-              <Update id={params.row.id} name={params.row.name} email={params.row.email} number={params.row.email}/>
+              <Update id={params.row.id} name={params.row.name} email={params.row.email} number={params.row.number}/>
             ),
           },
         ]}
