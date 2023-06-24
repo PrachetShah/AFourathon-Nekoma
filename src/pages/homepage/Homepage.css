@@ -1,12 +1,12 @@
 .right-box{
     min-height: 80vh;
-    min-width: 55vw;
+    width: 15vw;
     background-image: url(../../assets/homepage.png);
     background-repeat: no-repeat;
     background-size: cover;
-    overflow:hidden;
+    /* overflow:hidden; */
     background-position: center;
-    background-position-x: 4rem;
+    background-position-x: 1.5rem;
     background-position-y: -1rem;
 }
 .left-box{
