@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import img from './createstudent.svg';
 
 export default function CreateStudent() {
-
+    let token = sessionStorage.getItem('token')
     const [errorMessage, setErrorMessage] = useState(""); //for alert
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState({
@@ -55,21 +55,33 @@ export default function CreateStudent() {
                     headers: {
                         "Content-Type": "application/json",
                         Accept: "application/json",
+                        'Authorization': "Bearer" + " " + token
+                        //eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NzU5NDAyOCwianRpIjoiZDlmY2QwYzYtODVkNC00OWQwLWE1NGUtYzNiMDc5N2U3NWMwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImhtbUBnbWFpbC5jb20iLCJuYmYiOjE2ODc1OTQwMjgsImV4cCI6MTY4NzU5NDkyOH0._VTVCJMWl8bCAKDS9ehSHw4_eK8VqcZDlf8thinaluA"
                     },
                 }
             );
             console.log(result.data);
+            console.log(result.data.acccess_token);
             if (result.data.message === "Student created successfully") {
                 setErrorMessage('Student log created');
                 setOpen(true);
-                sessionStorage.setItem("token", result.data.token);
+                //sessionStorage.setItem("token", result.data.token);
 
             } else {
                 setErrorMessage('Please fill all details');
             }
         } catch (error) {
             console.log("Error" + error);
-
+            if (error.response) {
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                if (error.response.status == "401") {
+                    console.log(error.response.status)
+                    setErrorMessage('student already exists');
+                    setOpen(true);
+                }
+            }
         }
     }
 
@@ -94,7 +106,7 @@ export default function CreateStudent() {
                             sm={12}
                             md={12}
                             lg={12}
-                            style={{ alignItems: "flex", justifyContent: "center", marginTop: "10px", marginLeft: "36px", textAlign:'center' }}
+                            style={{ alignItems: "flex", justifyContent: "center", marginTop: "10px", marginLeft: "36px", textAlign: 'center' }}
                         >
                             <Typography style={{ fontWeight: "800", fontSize: "30px" }}>
                                 Add Students

@@ -47,6 +47,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function AllRecords() {
+  let token = sessionStorage.getItem('token')
   const [rows, setRows] = React.useState([]);
 
   React.useEffect(() => {

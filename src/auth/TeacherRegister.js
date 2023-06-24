@@ -77,10 +77,15 @@ export default function TeacherRegister() {
       }
     } catch (error) {
       console.log("Error" + error);
-      if (error.response.status === "401") {
-        console.log(error.response.status)
-        setErrorMessage('Email already registered');
-        setOpen(true);
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+        if (error.response.status == "401") {
+          console.log(error.response.status)
+          setErrorMessage('Email already registered');
+          setOpen(true);
+        }
       }
     }
   }
@@ -95,7 +100,7 @@ export default function TeacherRegister() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: `url(${login})`,   
+            backgroundImage: `url(${login})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -173,7 +178,7 @@ export default function TeacherRegister() {
               >
                 Signup
               </Button>
-              <Link to="/login" style={{color:"black"}}>Already have an account? Login</Link>
+              <Link to="/login" style={{ color: "black" }}>Already have an account? Login</Link>
             </Box>
           </Box>
         </Grid>

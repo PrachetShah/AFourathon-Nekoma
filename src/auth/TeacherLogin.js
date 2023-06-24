@@ -68,20 +68,37 @@ export default function TeacherLogin() {
           },
         }
       );
-      console.log(result.data);
+      console.log(result.data.access_token);
       //console.log(result.response.status)
-      if (result.data.message === "Allow Access") {
+      if (result.data.access_token) {
         setErrorMessage('Logged in');
         setOpen(true);
+        sessionStorage.setItem("token", result.data.access_token);
         history("/");
-        sessionStorage.setItem("token", result.data.token);
+      }
+      else {
+        alert('Please fill all details correctly')
+        setErrorMessage('Please fill all details correctly');
+        setOpen(true);
       }
     } catch (error) {
       console.log("Error" + error);
-      if (error.response.status === "401" || error.response.status === "404") {
-        console.log(error.response.status)
-        setErrorMessage('Please fill all details correctly');
-        setOpen(true);
+
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+        if (error.response.status == "401") {
+          console.log(error.response.status)
+          setErrorMessage('wrong credentials');
+          setOpen(true);
+        }
+        else if(error.response.status == "404")
+        {
+          console.log(error.response.status)
+          setErrorMessage('user does not exist');
+          setOpen(true);
+        }
       }
     }
   }
@@ -122,17 +139,6 @@ export default function TeacherLogin() {
             <Typography component="h1" variant="h5">
               Login
             </Typography>
-            {errorMessage && <Snackbar open={open} message={errorMessage} onClose={handleToClose} action={
-              <React.Fragment>
-                <IconButton
-                  size="small"
-                  aria-label="close"
-                  color="inherit"
-                  onClick={handleToClose}
-                >
-                </IconButton>
-              </React.Fragment>
-            } />}
             <Box
               component="form"
               noValidate
@@ -173,7 +179,18 @@ export default function TeacherLogin() {
               >
                 Login
               </Button>
-              <Link to="/register" style={{color:"black"}}>Don't have an account? Sign Up</Link>
+              {errorMessage && <Snackbar open={open} message={errorMessage} onClose={handleToClose} action={
+                <React.Fragment>
+                  <IconButton
+                    size="small"
+                    aria-label="close"
+                    color="inherit"
+                    onClick={handleToClose}
+                  >
+                  </IconButton>
+                </React.Fragment>
+              } />}
+              <Link to="/register" style={{ color: "black" }}>Don't have an account? Sign Up</Link>
             </Box>
           </Box>
         </Grid>

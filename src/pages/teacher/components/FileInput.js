@@ -11,7 +11,7 @@ export default function FileInput() {
     const [errorMessage, setErrorMessage] = useState(""); //for alert
     const [open, setOpen] = useState(false);
     const history = useNavigate();
-
+    let token = sessionStorage.getItem('token')
     const handleToClose = (event, reason) => {
         if ("clickaway" === reason) return;
         setOpen(false);
@@ -33,21 +33,30 @@ export default function FileInput() {
                     headers: {
                         "Content-Type": "multipart/form-data",
                         Accept: "application/json",
+                        'Authorization': "Bearer" + " " + token
                     },
                 }
             );
             console.log(result.data);
+            console.log(token)
             if (result.data.message === "Students Registered Succesffuly") {
-                setErrorMessage('Student log created');
+                setErrorMessage('bulk register done');
                 setOpen(true);
-                sessionStorage.setItem("token", result.data.token);
+                //sessionStorage.setItem("token", result.data.token);
 
-            } else {
-                setErrorMessage('error');
             }
         } catch (error) {
             console.log("Error" + error);
-
+            if (error.response) {
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                if (error.response.status == "404") {
+                    console.log(error.response.status)
+                    setErrorMessage('file not recieved');
+                    setOpen(true);
+                }
+            }
         }
     }
     return (
@@ -70,7 +79,7 @@ export default function FileInput() {
                     sm={12}
                     md={12}
                     lg={12}
-                    style={{ alignItems: "flex", justifyContent: "center", textAlign:'center' }}>
+                    style={{ alignItems: "flex", justifyContent: "center", textAlign: 'center' }}>
                     <div style={{ fontWeight: "700", fontSize: "23px" }}>OR</div>
                 </Grid>
                 {/* <input class="custom-file-input" type="file" onChange={handleSubmit} /> */}
