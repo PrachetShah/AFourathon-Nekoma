@@ -189,6 +189,21 @@ def get_students():
     return jsonify(user_list), 200
 
 
+@app.route('/retrieve/<int:user_id>', methods=['GET'])
+def retreive_one(user_id):
+    user = Student.query.get(user_id)
+    if not user:
+        return jsonify({'message': 'User not found'}), 404
+
+    return jsonify({
+            'id': user.id,
+            'name': user.name,
+            'email': user.email,
+            'number': user.number,
+            'userType': user.userType,
+        }), 200
+
+
 @app.route('/student/<int:user_id>', methods=['PUT'])
 @jwt_required()
 def edit_user(user_id):
