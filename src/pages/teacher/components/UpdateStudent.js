@@ -1,89 +1,55 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Grid, Typography, TextField, Button, Box, Snackbar, IconButton } from "@mui/material";
-import FileInput from "./components/FileInput";
 import axios from "axios";
-import { url } from "../../utils/api";
+import { url } from "../../../utils/api";
 import { useNavigate } from "react-router-dom";
-import img from './createstudent.svg';
+import img from '../createstudent.svg';
 
-export default function CreateStudent() {
+export default function UpdateStudent(idd, namee, emaill, numberr) {
     let token = sessionStorage.getItem('token')
     const [errorMessage, setErrorMessage] = useState(""); //for alert
     const [open, setOpen] = useState(false);
-    const [values, setValues] = useState({
-        id: "",
-        name: "",
-        email: "",
-        number: ""
-    });
-    const handleChanges = (event) => {
-        setValues({
-            ...values,
-            [event.target.name]: event.target.value,
-        });
-        console.log(values);
-    };
+    const [id, setId] = useState(null);
+    const [name, setName] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [number, setNumber] = useState(null);
     const history = useNavigate();
+    console.log(idd, namee, emaill, numberr)
     const handleToClose = (event, reason) => {
         if ("clickaway" === reason) return;
         setOpen(false);
         history("/allRecords")
     };
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            id: data.get("id"),
-            name: data.get("name"),
-            email: data.get("email"),
-            number: data.get("number")
+    useEffect(() => {
+        let updateStudents = async () => {
+            setName(namee);
+            setId(idd)
+            setEmail(emaill)
+            setNumber(numberr)
+        };
+        updateStudents();
+    }, [id]);
+
+
+    const editLog = async () => {
+        let formField = new FormData();
+
+        formField.append("name", name);
+        formField.append("id", id);
+        formField.append("email", email);
+        formField.append("number", number);
+
+        await axios({
+            method: "PUT",
+            url: `${url}student/${id}`,
+            headers: { Authorization: `Bearer ${token}` },
+            data: formField,
+        }).then((response) => {
+            console.log(response);
+            history("/allRecords");
         });
-        createLog();
     };
-    async function createLog() {
-        try {
-            let result = await axios.post(
-                url + "registerStudent",
-                {
-                    id: values.id,
-                    name: values.name,
-                    number: values.number,
-                    email: values.email,
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
-                        'Authorization': "Bearer" + " " + token
-                    },
-                }
-            );
-            console.log(result.data);
-            console.log(result.data.acccess_token);
-            if (result.data.message === "Student created successfully") {
-                setErrorMessage('Student log created');
-                setOpen(true);
-
-            } else {
-                setErrorMessage('Please fill all details');
-            }
-        } catch (error) {
-            console.log("Error" + error);
-            if (error.response) {
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-                if (error.response.status == "401") {
-                    console.log(error.response.status)
-                    setErrorMessage('student already exists');
-                    setOpen(true);
-                }
-            }
-        }
-    }
-
-
     return (
         <>
             <div>
@@ -123,8 +89,7 @@ export default function CreateStudent() {
                             </React.Fragment>
                         } />}
                         <img style={{ width: "400px", height: "400px" }} src={img} />
-                        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
-                            <FileInput />
+                        <Box component="form" sx={{ mt: 3 }}>
 
                             <Grid container direction="row"
                                 justifyContent="space-evenly"
@@ -138,56 +103,57 @@ export default function CreateStudent() {
                                 alignItems="flex-start" marginBottom={1}>
                                 <TextField
                                     margin="normal"
-                                    required
+                                    // required
                                     style={{ boxColor: "black", width: "60vh" }}
-                                    id="id"
+                                    //id="id"
                                     label="Student ID"
                                     name="id"
-                                    value={values.id}
-                                    onChange={handleChanges}
-                                    autoComplete="id"
-                                    autoFocus
+                                    value={id}
+                                    onChange={(e) => setId(e.target.value)}
+                                // autoComplete="id"
+                                // autoFocus
                                 />
                                 <TextField
                                     margin="normal"
-                                    required
+                                    //required
                                     style={{ boxColor: "black", width: "60vh" }}
-                                    id="name"
+                                    //id="name"
                                     label="Name"
                                     name="name"
-                                    value={values.name}
-                                    onChange={handleChanges}
-                                    autoComplete="name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    //autoComplete="name"
                                 />
                                 <TextField
                                     margin="normal"
-                                    required
+                                    //required
                                     style={{ boxColor: "black", width: "60vh" }}
-                                    id="email"
+                                    //id="email"
                                     label="Email"
                                     name="email"
-                                    value={values.email}
-                                    onChange={handleChanges}
-                                    autoComplete="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    //autoComplete="email"
                                 />
                                 <TextField
                                     margin="normal"
-                                    required
-                                    id="number"
+                                    //required
+                                    //id="number"
                                     label="Number"
                                     name="number"
-                                    value={values.number}
-                                    onChange={handleChanges}
-                                    autoComplete="number"
+                                    value={number}
+                                    onChange={(e) => setNumber(e.target.value)}
+                                    //autoComplete="number"
                                     style={{ boxColor: "black", width: "60vh" }}
                                 />
                                 <Button
                                     type="submit"
+                                    onClick={editLog}
                                     variant="contained"
                                     sx={{ mt: 5, ml: 20 }}
                                     style={{ backgroundColor: "black", color: "white" }}
                                 >
-                                    Create Record
+                                    Update Record
                                 </Button>
                             </Grid>
                         </Box>
