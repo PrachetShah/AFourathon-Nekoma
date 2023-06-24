@@ -74,7 +74,7 @@ export default function TeacherLogin() {
         setErrorMessage('Logged in');
         setOpen(true);
         sessionStorage.setItem("token", result.data.access_token);
-        history("/");
+        history("/home");
       }
       else {
         alert('Please fill all details correctly')

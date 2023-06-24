@@ -50,8 +50,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function AllRecords() {
   let token = sessionStorage.getItem("token");
   const [rows, setRows] = React.useState([]);
-  const [deleteConfirmationOpen, setDeleteConfirmationOpen] =
-    React.useState(false);
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = React.useState(false);
   const [deleteStudentId, setDeleteStudentId] = React.useState(null);
 
   React.useEffect(() => {
