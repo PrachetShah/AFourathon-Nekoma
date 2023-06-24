@@ -6,11 +6,17 @@ import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 import { url } from "../../utils/api";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
 
 const columns = [
   { field: "id", headerName: "Student Id", width: 220 },
   { field: "name", headerName: "Student Name", width: 260 },
-  { field: "email", headerName: "Email Address", width: 350 },
+  { field: "email", headerName: "Email Address", width: 290 },
   {
     field: "number",
     headerName: "Phone Number",
@@ -39,13 +45,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function AllRecords() {
-  let token = sessionStorage.getItem('token')
+  let token = sessionStorage.getItem("token");
   const [rows, setRows] = React.useState([]);
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] =
+    React.useState(false);
+  const [deleteStudentId, setDeleteStudentId] = React.useState(null);
 
   React.useEffect(() => {
     axios
       .get(url + "getStudents", {
-        headers: { Authorization: `Bearer ${token}` }, // Add the header here
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         setRows(response.data);
@@ -55,22 +64,37 @@ export default function AllRecords() {
       });
   }, []);
 
-  const handleDelete = (id) => {
-    axios
-      .put(`${url}student/delete/${id}`, null, {
-        headers: { Authorization: `Bearer ${token}` }, // Add the header here
-      })
-      .then(() => {
-        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
-      })
-      .catch((error) => {
-        console.error("Error deleting student:", error);
-      });
+  const handleDeleteConfirmationOpen = (id) => {
+    setDeleteStudentId(id);
+    setDeleteConfirmationOpen(true);
+  };
+
+  const handleDeleteConfirmationClose = () => {
+    setDeleteStudentId(null);
+    setDeleteConfirmationOpen(false);
+  };
+
+  const handleDelete = () => {
+    if (deleteStudentId) {
+      axios
+        .put(`${url}student/delete/${deleteStudentId}`, null, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then(() => {
+          setRows((prevRows) =>
+            prevRows.filter((row) => row.id !== deleteStudentId)
+          );
+          handleDeleteConfirmationClose();
+        })
+        .catch((error) => {
+          console.error("Error deleting student:", error);
+        });
+    }
   };
 
   function Delete({ id, handleDelete }) {
     const handleClick = () => {
-      handleDelete(id);
+      handleDeleteConfirmationOpen(id);
     };
 
     return (
@@ -107,9 +131,28 @@ export default function AllRecords() {
           pagination: { paginationModel: { page: 0, pageSize: 10 } },
         }}
         pageSizeOptions={[5, 10]}
-        // checkboxSelection
         style={{ fontSize: "20px" }}
       />
+
+      <Dialog
+        open={deleteConfirmationOpen}
+        onClose={handleDeleteConfirmationClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Delete Student?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete this student?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteConfirmationClose}>Cancel</Button>
+          <Button onClick={handleDelete} autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

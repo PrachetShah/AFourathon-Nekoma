@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./Navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const removeToken = () => {
+    sessionStorage.removeItem("token");
+    navigate('/login');
   };
 
   return (
@@ -33,7 +39,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="navbar-item">
-              <Link to="/logout" className="navbar-link" onClick={toggleNavbar}>
+              <Link to="/login" className="navbar-link" onClick={removeToken}>
                 Logout
               </Link>
             </li>
