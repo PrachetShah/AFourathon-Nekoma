@@ -6,6 +6,9 @@ import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 import { url } from "../../utils/api";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import UpdateStudent from "./components/UpdateStudent";
+import { useNavigate } from "react-router-dom";
 
 const columns = [
   { field: "id", headerName: "Student Id", width: 220 },
@@ -80,7 +83,21 @@ export default function AllRecords() {
       ></DeleteIcon>
     );
   }
+  const history = useNavigate();
+  function Update({ id, name, email, number }) {
+    const handleClick = () => {
 
+      <UpdateStudent id={id} name={name} email={email} number={number}/>
+      history(`/updateStudent/${id}`)
+    };
+
+    return (
+      <ModeEditIcon
+        onClick={handleClick}
+        style={{ cursor: "pointer" }}
+      ></ModeEditIcon>
+    );
+  }
   return (
     <div
       style={{
@@ -100,6 +117,14 @@ export default function AllRecords() {
             width: 120,
             renderCell: (params) => (
               <Delete id={params.row.id} handleDelete={handleDelete} />
+            ),
+          },
+          {
+            field: "update",
+            headerName: "Update",
+            width: 120,
+            renderCell: (params) => (
+              <Update id={params.row.id} name={params.row.name} email={params.row.email} number={params.row.email}/>
             ),
           },
         ]}
