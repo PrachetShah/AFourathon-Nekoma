@@ -98,7 +98,7 @@ export default function TeacherRegister() {
           item
           xs={false}
           sm={4}
-          md={7}
+          md={6}
           sx={{
             backgroundImage: `url(${login})`,
             backgroundRepeat: "no-repeat",
@@ -106,11 +106,11 @@ export default function TeacherRegister() {
               t.palette.mode === "light"
                 ? t.palette.grey[50]
                 : t.palette.grey[900],
-            backgroundSize: "cover",
+            // backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
           <Box
             sx={{
               my: 15,
@@ -156,6 +156,7 @@ export default function TeacherRegister() {
                 autoComplete="email"
                 autoFocus
               />
+              <br/>
               <TextField
                 margin="normal"
                 required
@@ -169,6 +170,7 @@ export default function TeacherRegister() {
                 autoComplete="current-password"
                 sx={{ mt: 3 }}
               />
+              <br/>
               <Button
                 type="submit"
                 fullWidth
