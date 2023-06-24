@@ -190,6 +190,7 @@ def get_students():
 
 
 @app.route('/retrieve/<int:user_id>', methods=['GET'])
+@jwt_required()
 def retreive_one(user_id):
     user = Student.query.get(user_id)
     if not user:
