@@ -1,16 +1,8 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-
-import Paper from "@mui/material/Paper";
-import Update from "./components/Update";
-import CreateStudent from "./CreateStudent";
 import axios from "axios";
 import { url } from "../../utils/api";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -52,7 +44,9 @@ export default function AllRecords() {
 
   React.useEffect(() => {
     axios
-      .get(url + "getStudents")
+      .get(url + "getStudents", {
+        headers: { Authorization: `Bearer ${token}` }, // Add the header here
+      })
       .then((response) => {
         setRows(response.data);
       })
@@ -63,7 +57,9 @@ export default function AllRecords() {
 
   const handleDelete = (id) => {
     axios
-      .post(`${url}student/delete/${id}`)
+      .put(`${url}student/delete/${id}`, null, {
+        headers: { Authorization: `Bearer ${token}` }, // Add the header here
+      })
       .then(() => {
         setRows((prevRows) => prevRows.filter((row) => row.id !== id));
       })
