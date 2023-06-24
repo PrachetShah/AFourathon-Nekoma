@@ -219,6 +219,20 @@ def edit_user(user_id):
     else:
         return jsonify({'message': 'Student with ID already exists'}), 401
 
+@app.route('/student/delete/<int:user_id>', methods=['PUT'])
+@jwt_required()
+def delete_user(user_id):
+    user = Student.query.get(user_id)
+
+    if not user:
+        return jsonify({'message': 'User not found'}), 404
+
+    try:
+        db.session.delete(user)
+        db.session.commit()
+        return jsonify({'message': 'Student deleted successfully'}), 200
+    except Exception as e:
+        return jsonify({'message': 'Unable to Delete Student'}), 401
 
 if __name__ == '__main__':
     # db.create_all()
