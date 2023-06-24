@@ -77,111 +77,112 @@ export default function CreateStudent() {
     return (
         <>
             <div>
-                {/* <Grid container direction="row"
-                    justifyContent="space-evenly"
-                    alignItems="flex"> */}
+                <Grid container direction="row"
+                    justifyContent="center"
+                    alignItems="flex">
 
-                <Grid
-                    container
-                    direction="row"
-                    justifyContent="space-evenly"
-                    alignItems="flex"
-                    style={{ gap: 15 }}
-                >
                     <Grid
-                        item
-                        xs={12}
-                        sm={12}
-                        md={12}
-                        lg={12}
-                        style={{ marginTop: "10px", marginLeft: "36px" }}
+                        container
+                        direction="row"
+                        justifyContent="space-evenly"
+                        alignItems="flex"
+                        style={{ gap: 15 }}
                     >
-                        <Typography style={{ fontWeight: "800", fontSize: "30px" }}>
-                            Add Students
-                        </Typography>
-                    </Grid>
-                    {errorMessage && <Snackbar open={open} message={errorMessage} onClose={handleToClose} action={
-                        <React.Fragment>
-                            <IconButton
-                                size="small"
-                                aria-label="close"
-                                color="inherit"
-                                onClick={handleToClose}
-                            >
-                                <p>View</p>
-                            </IconButton>
-                        </React.Fragment>
-                    } />}
-                    <img style={{ width: "400px", height: "400px" }} src={img} />
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
-                        <FileInput />
-                        <Grid container direction="row"
-                            justifyContent="space-evenly"
-                            alignItems="flex-start" marginBottom={1}>
-
-                            <div style={{ fontWeight: "700", fontSize: "23px" }}>Add individual student record</div>
-                        </Grid>
                         <Grid
-                            container direction="column"
-                            justifyContent="space-evenly"
-                            alignItems="flex-start" marginBottom={1}>
-                            <TextField
-                                margin="normal"
-                                required
-                                style={{ boxColor: "black", width: "60vh" }}
-                                id="id"
-                                label="Student ID"
-                                name="id"
-                                value={values.id}
-                                onChange={handleChanges}
-                                autoComplete="id"
-                                autoFocus
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                style={{ boxColor: "black", width: "60vh" }}
-                                id="name"
-                                label="Name"
-                                name="name"
-                                value={values.name}
-                                onChange={handleChanges}
-                                autoComplete="name"
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                style={{ boxColor: "black", width: "60vh" }}
-                                id="email"
-                                label="Email"
-                                name="email"
-                                value={values.email}
-                                onChange={handleChanges}
-                                autoComplete="email"
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                id="number"
-                                label="Number"
-                                name="number"
-                                value={values.number}
-                                onChange={handleChanges}
-                                autoComplete="number"
-                                style={{ boxColor: "black", width: "60vh" }}
-                            />
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                sx={{ mt: 5, ml: 20 }}
-                                style={{ backgroundColor: "black", color: "white" }}
-                            >
-                                Create Record
-                            </Button>
+                            item
+                            xs={12}
+                            sm={12}
+                            md={12}
+                            lg={12}
+                            style={{ alignItems: "flex", justifyContent: "center", marginTop: "10px", marginLeft: "36px", textAlign:'center' }}
+                        >
+                            <Typography style={{ fontWeight: "800", fontSize: "30px" }}>
+                                Add Students
+                            </Typography>
                         </Grid>
-                    </Box>
+                        {errorMessage && <Snackbar open={open} message={errorMessage} onClose={handleToClose} action={
+                            <React.Fragment>
+                                <IconButton
+                                    size="small"
+                                    aria-label="close"
+                                    color="inherit"
+                                    onClick={handleToClose}
+                                >
+                                    <p>View</p>
+                                </IconButton>
+                            </React.Fragment>
+                        } />}
+                        <img style={{ width: "400px", height: "400px" }} src={img} />
+                        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
+                            <FileInput />
+
+                            <Grid container direction="row"
+                                justifyContent="space-evenly"
+                                alignItems="flex-start" marginBottom={1}>
+
+                                <div style={{ fontWeight: "700", fontSize: "23px" }}>Add individual student record</div>
+                            </Grid>
+                            <Grid
+                                container direction="column"
+                                justifyContent="space-evenly"
+                                alignItems="flex-start" marginBottom={1}>
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    style={{ boxColor: "black", width: "60vh" }}
+                                    id="id"
+                                    label="Student ID"
+                                    name="id"
+                                    value={values.id}
+                                    onChange={handleChanges}
+                                    autoComplete="id"
+                                    autoFocus
+                                />
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    style={{ boxColor: "black", width: "60vh" }}
+                                    id="name"
+                                    label="Name"
+                                    name="name"
+                                    value={values.name}
+                                    onChange={handleChanges}
+                                    autoComplete="name"
+                                />
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    style={{ boxColor: "black", width: "60vh" }}
+                                    id="email"
+                                    label="Email"
+                                    name="email"
+                                    value={values.email}
+                                    onChange={handleChanges}
+                                    autoComplete="email"
+                                />
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    id="number"
+                                    label="Number"
+                                    name="number"
+                                    value={values.number}
+                                    onChange={handleChanges}
+                                    autoComplete="number"
+                                    style={{ boxColor: "black", width: "60vh" }}
+                                />
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    sx={{ mt: 5, ml: 20 }}
+                                    style={{ backgroundColor: "black", color: "white" }}
+                                >
+                                    Create Record
+                                </Button>
+                            </Grid>
+                        </Box>
+                    </Grid>
                 </Grid>
-                {/* </Grid> */}
             </div>
         </>
     )

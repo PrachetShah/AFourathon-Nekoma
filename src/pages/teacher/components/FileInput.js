@@ -3,7 +3,7 @@ import axios from "axios";
 import { url } from '../../../utils/api';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Snackbar, IconButton, Button } from "@mui/material";
+import { Snackbar, IconButton, Button, Grid } from "@mui/material";
 import './FileInput.css';
 
 export default function FileInput() {
@@ -53,27 +53,40 @@ export default function FileInput() {
     return (
 
         <div>
-            <span style={{ fontWeight: "700", fontSize: "23px" }}>Add students via csv file </span>
-            <Button
-                variant="contained"
-                style={{ marginLeft: "2px", backgroundColor: "black", color: "white" }}>
-                <label style={{ cursor: "pointer" }} htmlFor="input-img">Upload</label>
-                <input type="file" id="input-img" onChange={handleSubmit} />
-            </Button>
-            <div style={{ fontWeight: "700", fontSize: "23px" }}>OR</div>
-            {/* <input class="custom-file-input" type="file" onChange={handleSubmit} /> */}
-            {errorMessage && <Snackbar open={open} message={errorMessage} onClose={handleToClose} action={
-                <React.Fragment>
-                    <IconButton
-                        size="small"
-                        aria-label="close"
-                        color="inherit"
-                        onClick={handleToClose}
-                    >
-                        <p>View</p>
-                    </IconButton>
-                </React.Fragment>
-            } />}
+            <Grid container direction="row"
+                justifyContent="center"
+                alignItems="flex">
+                <span style={{ fontWeight: "700", fontSize: "23px" }}>Add students via csv file </span>
+                <Button
+                    variant="contained"
+                    style={{ marginLeft: "5px", backgroundColor: "black", color: "white" }}>
+                    <label style={{ cursor: "pointer" }} htmlFor="input-img">Upload</label>
+                    <input type="file" id="input-img" onChange={handleSubmit} />
+                </Button>
+                <br />
+                <Grid
+                    item
+                    xs={12}
+                    sm={12}
+                    md={12}
+                    lg={12}
+                    style={{ alignItems: "flex", justifyContent: "center", textAlign:'center' }}>
+                    <div style={{ fontWeight: "700", fontSize: "23px" }}>OR</div>
+                </Grid>
+                {/* <input class="custom-file-input" type="file" onChange={handleSubmit} /> */}
+                {errorMessage && <Snackbar open={open} message={errorMessage} onClose={handleToClose} action={
+                    <React.Fragment>
+                        <IconButton
+                            size="small"
+                            aria-label="close"
+                            color="inherit"
+                            onClick={handleToClose}
+                        >
+                            <p>View</p>
+                        </IconButton>
+                    </React.Fragment>
+                } />}
+            </Grid>
         </div>
     )
 }
