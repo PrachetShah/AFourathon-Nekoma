@@ -109,7 +109,8 @@ export default function AllRecords() {
   const history = useNavigate();
   function Update({ id, name, email, number }) {
     const handleClick = () => {
-
+        //console.log(id, name, email);
+        let iddd
       <UpdateStudent id={id} name={name} email={email} number={number}/>
       history(`/updateStudent/${id}`)
     };

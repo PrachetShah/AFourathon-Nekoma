@@ -6,39 +6,39 @@ import { url } from "../../../utils/api";
 import { useNavigate } from "react-router-dom";
 import img from '../createstudent.svg';
 
-export default function UpdateStudent(idd, namee, emaill, numberr) {
+export default function UpdateStudent({ id, name, email, number }) {
     let token = sessionStorage.getItem('token')
     const [errorMessage, setErrorMessage] = useState(""); //for alert
     const [open, setOpen] = useState(false);
-    const [id, setId] = useState(null);
-    const [name, setName] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [number, setNumber] = useState(null);
+    const [idd, setId] = useState(id);
+    const [namee, setName] = useState(name);
+    const [emaill, setEmail] = useState(email);
+    const [numberr, setNumber] = useState(number);
     const history = useNavigate();
-    console.log(idd, namee, emaill, numberr)
+    console.log(id, name, email, number)
     const handleToClose = (event, reason) => {
         if ("clickaway" === reason) return;
         setOpen(false);
         history("/allRecords")
     };
-    useEffect(() => {
-        let updateStudents = async () => {
-            setName(namee);
-            setId(idd)
-            setEmail(emaill)
-            setNumber(numberr)
-        };
-        updateStudents();
-    }, [id]);
+    // useEffect(() => {
+    //     let updateStudents = async () => {
+    //         setName(name);
+    //         setId(id)
+    //         setEmail(email)
+    //         setNumber(number)
+    //     };
+    //     updateStudents();
+    // }, [id]);
 
 
     const editLog = async () => {
         let formField = new FormData();
 
-        formField.append("name", name);
-        formField.append("id", id);
-        formField.append("email", email);
-        formField.append("number", number);
+        formField.append("name", namee);
+        formField.append("id", idd);
+        formField.append("email", emaill);
+        formField.append("number", numberr);
 
         await axios({
             method: "PUT",
@@ -108,7 +108,7 @@ export default function UpdateStudent(idd, namee, emaill, numberr) {
                                     //id="id"
                                     label="Student ID"
                                     name="id"
-                                    value={id}
+                                    value={idd}
                                     onChange={(e) => setId(e.target.value)}
                                 // autoComplete="id"
                                 // autoFocus
@@ -120,9 +120,9 @@ export default function UpdateStudent(idd, namee, emaill, numberr) {
                                     //id="name"
                                     label="Name"
                                     name="name"
-                                    value={name}
+                                    value={namee}
                                     onChange={(e) => setName(e.target.value)}
-                                    //autoComplete="name"
+                                //autoComplete="name"
                                 />
                                 <TextField
                                     margin="normal"
@@ -131,9 +131,9 @@ export default function UpdateStudent(idd, namee, emaill, numberr) {
                                     //id="email"
                                     label="Email"
                                     name="email"
-                                    value={email}
+                                    value={emaill}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    //autoComplete="email"
+                                //autoComplete="email"
                                 />
                                 <TextField
                                     margin="normal"
@@ -141,7 +141,7 @@ export default function UpdateStudent(idd, namee, emaill, numberr) {
                                     //id="number"
                                     label="Number"
                                     name="number"
-                                    value={number}
+                                    value={numberr}
                                     onChange={(e) => setNumber(e.target.value)}
                                     //autoComplete="number"
                                     style={{ boxColor: "black", width: "60vh" }}

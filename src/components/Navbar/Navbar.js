@@ -29,7 +29,7 @@ const Navbar = () => {
         <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
           <ul className="navbar-items">
             <li className="navbar-item">
-              <Link to="/" className="navbar-link" onClick={toggleNavbar}>
+              <Link to="/home" className="navbar-link" onClick={toggleNavbar}>
                 Home
               </Link>
             </li>
