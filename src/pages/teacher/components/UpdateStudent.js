@@ -3,42 +3,46 @@ import { useState, useEffect } from "react";
 import { Grid, Typography, TextField, Button, Box, Snackbar, IconButton } from "@mui/material";
 import axios from "axios";
 import { url } from "../../../utils/api";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import img from '../createstudent.svg';
 
-export default function UpdateStudent({ id, name, email, number }) {
+export default function UpdateStudent() {
     let token = sessionStorage.getItem('token')
+    const { id } = useParams();
     const [errorMessage, setErrorMessage] = useState(""); //for alert
     const [open, setOpen] = useState(false);
-    const [idd, setId] = useState(id);
-    const [namee, setName] = useState(name);
-    const [emaill, setEmail] = useState(email);
-    const [numberr, setNumber] = useState(number);
+    const [idd, setId] = useState();
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
+    const [number, setNumber] = useState();
     const history = useNavigate();
-    console.log(id, name, email, number)
+
     const handleToClose = (event, reason) => {
         if ("clickaway" === reason) return;
         setOpen(false);
         history("/allRecords")
     };
-    // useEffect(() => {
-    //     let updateStudents = async () => {
-    //         setName(name);
-    //         setId(id)
-    //         setEmail(email)
-    //         setNumber(number)
-    //     };
-    //     updateStudents();
-    // }, [id]);
-
+    useEffect(() => {
+        let updateStudent = async () => {
+            const result = await axios.get(
+                `${url}retrieve/${id}`, { headers: { Authorization: `Bearer ${token}` } }
+            );
+            setName(result.data.name);
+            setId(result.data.id)
+            setEmail(result.data.email)
+            setNumber(result.data.number)
+        };
+        updateStudent();
+    }, [id]);
+    // console.log()
 
     const editLog = async () => {
         let formField = new FormData();
-
-        formField.append("name", namee);
+        
         formField.append("id", idd);
-        formField.append("email", emaill);
-        formField.append("number", numberr);
+        formField.append("name", name);
+        formField.append("email", email);
+        formField.append("number", number);
 
         await axios({
             method: "PUT",
@@ -89,7 +93,7 @@ export default function UpdateStudent({ id, name, email, number }) {
                             </React.Fragment>
                         } />}
                         <img style={{ width: "400px", height: "400px" }} src={img} />
-                        <Box component="form" sx={{ mt: 3 }}>
+                        <Box sx={{ mt: 3 }}>
 
                             <Grid container direction="row"
                                 justifyContent="space-evenly"
@@ -106,7 +110,7 @@ export default function UpdateStudent({ id, name, email, number }) {
                                     // required
                                     style={{ boxColor: "black", width: "60vh" }}
                                     //id="id"
-                                    label="Student ID"
+                                    //label="Student ID"
                                     name="id"
                                     value={idd}
                                     onChange={(e) => setId(e.target.value)}
@@ -118,9 +122,9 @@ export default function UpdateStudent({ id, name, email, number }) {
                                     //required
                                     style={{ boxColor: "black", width: "60vh" }}
                                     //id="name"
-                                    label="Name"
+                                    //label="Name"
                                     name="name"
-                                    value={namee}
+                                    value={name}
                                     onChange={(e) => setName(e.target.value)}
                                 //autoComplete="name"
                                 />
@@ -129,9 +133,9 @@ export default function UpdateStudent({ id, name, email, number }) {
                                     //required
                                     style={{ boxColor: "black", width: "60vh" }}
                                     //id="email"
-                                    label="Email"
+                                    //label="Email"
                                     name="email"
-                                    value={emaill}
+                                    value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 //autoComplete="email"
                                 />
@@ -139,9 +143,9 @@ export default function UpdateStudent({ id, name, email, number }) {
                                     margin="normal"
                                     //required
                                     //id="number"
-                                    label="Number"
+                                    //label="Number"
                                     name="number"
-                                    value={numberr}
+                                    value={number}
                                     onChange={(e) => setNumber(e.target.value)}
                                     //autoComplete="number"
                                     style={{ boxColor: "black", width: "60vh" }}
