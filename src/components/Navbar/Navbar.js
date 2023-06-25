@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import "./Navbar.css";
 
 const Navbar = () => {
+  let token = sessionStorage.getItem('token')
+  let isToken = false;
+  if (token) {
+    isToken = true;
+  }
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
@@ -32,11 +37,29 @@ const Navbar = () => {
                 Add Students
               </Link>
             </li>
-            <li className="navbar-item">
-              <Link to="/logout" className="navbar-link" onClick={toggleNavbar}>
-                Logout
-              </Link>
-            </li>
+            {isToken ?
+              (
+
+                <li className="navbar-item">
+                  <Link to="/logout" className="navbar-link" onClick={toggleNavbar}>
+                    Logout
+                  </Link>
+                </li>)
+              :
+              (
+                <>
+                  <li className="navbar-item">
+                    <Link to="/login" className="navbar-link" onClick={toggleNavbar}>
+                      Login
+                    </Link>
+                  </li>
+                  <li className="navbar-item">
+                    <Link to="/register" className="navbar-link" onClick={toggleNavbar}>
+                      Signup
+                    </Link>
+                  </li>
+                </>)
+            }
           </ul>
         </div>
         <div className={`navbar-toggle ${isOpen ? 'active' : ''}`} onClick={toggleNavbar}>
