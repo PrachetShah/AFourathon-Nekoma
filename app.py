@@ -7,6 +7,7 @@ from werkzeug.utils import secure_filename
 from flask_cors import CORS
 import pandas as pd
 import os
+from datetime import timedelta
 
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -19,6 +20,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 app.config["JWT_SECRET_KEY"] = "lets-keep-it-hello" 
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=2)
 jwt = JWTManager(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///library.db'  # SQLite database file
