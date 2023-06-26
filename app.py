@@ -219,7 +219,8 @@ def edit_user(user_id):
     exists = db.session.query(db.exists().where(Student.id == data['id'])).scalar()
     print(id, " : ", exists)
 
-    if(not exists):
+    # if(not exists):
+    try:
         if 'id' in data:
             user.id = data['id']
         if 'name' in data:
@@ -232,7 +233,8 @@ def edit_user(user_id):
         db.session.commit()
 
         return jsonify({'message': 'Student updated successfully'}), 200
-    else:
+    except Exception as e:
+        print(e)
         return jsonify({'message': 'Student with ID already exists'}), 401
 
 @app.route('/student/delete/<int:user_id>', methods=['PUT'])
