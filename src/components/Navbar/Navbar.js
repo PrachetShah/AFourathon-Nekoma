@@ -29,7 +29,7 @@ const Navbar = () => {
         <div className={`navbar-menu ${isOpen ? "active" : ""}`}>
           <ul className="navbar-items">
             <li className="navbar-item">
-              <Link to="/home" className="navbar-link" onClick={toggleNavbar}>
+              <Link to="/" className="navbar-link" onClick={toggleNavbar}>
                 Home
               </Link>
             </li>
@@ -67,13 +67,8 @@ const Navbar = () => {
                 <li className="navbar-item">
                   <Link
                     to="/register"
-                    className="navbar-link"
+                    className="navbar-link-signup"
                     onClick={toggleNavbar}
-                    style={{
-                      border: "2px solid black",
-                      borderRadius: "50%",
-                      padding: "5px 10px",
-                    }}
                   >
                     Sign up
                   </Link>

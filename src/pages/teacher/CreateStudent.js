@@ -5,7 +5,7 @@ import FileInput from "./components/FileInput";
 import axios from "axios";
 import { url } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
-import img from './createstudent.svg';
+import img from '../../assets/createstudent.svg';
 
 export default function CreateStudent() {
     let token = sessionStorage.getItem('token')

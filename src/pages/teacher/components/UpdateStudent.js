@@ -4,7 +4,7 @@ import { Grid, Typography, TextField, Button, Box, Snackbar, IconButton } from "
 import axios from "axios";
 import { url } from "../../../utils/api";
 import { useParams, useNavigate } from "react-router-dom";
-import img from '../createstudent.svg';
+import img from '../../../assets/createstudent.svg';
 
 export default function UpdateStudent() {
     let token = sessionStorage.getItem('token')

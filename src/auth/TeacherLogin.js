@@ -156,7 +156,6 @@ export default function TeacherLogin() {
                 onChange={handleChanges}
                 autoComplete="email"
                 autoFocus
-                // sx={{ width: "450px" }}
               />
               <br/>
               <TextField
