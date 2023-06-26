@@ -110,7 +110,7 @@ export default function UpdateStudent() {
                             style={{ alignItems: "flex", justifyContent: "center", marginTop: "10px", marginLeft: "36px", textAlign: 'center' }}
                         >
                             <Typography style={{ fontWeight: "800", fontSize: "30px" }}>
-                                Add Students
+                            Update Students
                             </Typography>
                         </Grid>
                         {errorMessage && <Snackbar open={open} message={errorMessage} onClose={handleToClose} action={
@@ -132,7 +132,7 @@ export default function UpdateStudent() {
                                 justifyContent="space-evenly"
                                 alignItems="flex-start" marginBottom={1}>
 
-                                <div style={{ fontWeight: "700", fontSize: "23px" }}>Add individual student record</div>
+                                <div style={{ fontWeight: "700", fontSize: "23px" }}>Update individual student record</div>
                             </Grid>
                             <Grid
                                 container direction="column"
