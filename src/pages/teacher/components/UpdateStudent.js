@@ -38,21 +38,44 @@ export default function UpdateStudent() {
 
     const editLog = async () => {
         let formField = new FormData();
-        
-        formField.append("id", idd);
-        formField.append("name", name);
-        formField.append("email", email);
-        formField.append("number", number);
+
+        // formField.append("id", idd);
+        // formField.append("name", name);
+        // formField.append("email", email);
+        // formField.append("number", number);
+        let config = {
+            "id": idd,
+            "name": name,
+            "email": email,
+            "number": number
+        }
 
         await axios({
             method: "PUT",
             url: `${url}student/${id}`,
             headers: { Authorization: `Bearer ${token}` },
-            data: formField,
+            data: config,
         }).then((response) => {
             console.log(response);
-            history("/allRecords");
-        });
+            if (response.data.message === "Student updated successfully") {
+                setErrorMessage('Student updated successfully');
+                setOpen(true);
+
+            }
+            //history("/allRecords");
+        })
+        // .then((error) => {
+        //     if (error.response) {
+        //         console.log(error.response.data);
+        //         console.log(error.response.status);
+        //         console.log(error.response.headers);
+        //         if (error.response.status == "401") {
+        //             console.log(error.response.status)
+        //             setErrorMessage('student already exists');
+        //             setOpen(true);
+        //         }
+        //     }
+        // });
     };
     return (
         <>
