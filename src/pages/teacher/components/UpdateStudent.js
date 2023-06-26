@@ -37,7 +37,6 @@ export default function UpdateStudent() {
     // console.log()
 
     const editLog = async () => {
-        let formField = new FormData();
 
         // formField.append("id", idd);
         // formField.append("name", name);
@@ -49,33 +48,44 @@ export default function UpdateStudent() {
             "email": email,
             "number": number
         }
-
-        await axios({
-            method: "PUT",
-            url: `${url}student/${id}`,
-            headers: { Authorization: `Bearer ${token}` },
-            data: config,
-        }).then((response) => {
-            console.log(response);
-            if (response.data.message === "Student updated successfully") {
+        try {
+            let result = await axios.put(
+                `${url}student/${id}`,
+                {
+                    // config
+                    id: idd,
+                    name: name,
+                    email: email,
+                    number: number
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        'Authorization': "Bearer" + " " + token
+                    },
+                }
+            );
+            console.log(result.data);
+            console.log(result.data.acccess_token);
+            if (result.data.message === "Student updated successfully") {
                 setErrorMessage('Student updated successfully');
                 setOpen(true);
 
             }
-            //history("/allRecords");
-        })
-        // .then((error) => {
-        //     if (error.response) {
-        //         console.log(error.response.data);
-        //         console.log(error.response.status);
-        //         console.log(error.response.headers);
-        //         if (error.response.status == "401") {
-        //             console.log(error.response.status)
-        //             setErrorMessage('student already exists');
-        //             setOpen(true);
-        //         }
-        //     }
-        // });
+        } catch (error) {
+            console.log("Error" + error);
+            if (error.response) {
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                if (error.response.status == "401") {
+                    console.log(error.response.status)
+                    setErrorMessage('student already exists');
+                    setOpen(true);
+                }
+            }
+        }
     };
     return (
         <>
