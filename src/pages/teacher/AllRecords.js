@@ -1,8 +1,5 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { styled } from "@mui/material/styles";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 import { url } from "../../utils/api";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -18,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 const columns = [
   { field: "id", headerName: "Student Id", width: 220 },
-  { field: "name", headerName: "Student Name", width: 260 },
+  { field: "name", headerName: "Student Name", width: 220 },
   { field: "email", headerName: "Email Address", width: 290 },
   {
     field: "number",
@@ -26,26 +23,6 @@ const columns = [
     width: 210,
   },
 ];
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
 
 export default function AllRecords() {
   let token = sessionStorage.getItem("token");

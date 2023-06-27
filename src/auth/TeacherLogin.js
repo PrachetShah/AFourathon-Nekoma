@@ -90,13 +90,13 @@ export default function TeacherLogin() {
         console.log(error.response.headers);
         if (error.response.status == "401") {
           console.log(error.response.status)
-          setErrorMessage('wrong credentials');
+          setErrorMessage('Wrong credentials');
           setOpen(true);
         }
         else if(error.response.status == "404")
         {
           console.log(error.response.status)
-          setErrorMessage('user does not exist');
+          setErrorMessage('User does not exist');
           setOpen(true);
         }
       }

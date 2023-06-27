@@ -122,7 +122,7 @@ export default function CreateStudent() {
                                 </IconButton>
                             </React.Fragment>
                         } />}
-                        <img style={{ width: "400px", height: "400px" }} src={img} />
+                        <img style={{ width: "400px", height: "400px" }} src={img} alt=""/>
                         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
                             <FileInput />
 

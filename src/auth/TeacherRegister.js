@@ -73,7 +73,7 @@ export default function TeacherRegister() {
         setErrorMessage('Registration successful');
         setOpen(true);
         sessionStorage.setItem("token", result.data.token);
-        history("/")
+        history("/login")
       }
     } catch (error) {
       console.log("Error" + error);

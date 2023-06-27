@@ -92,7 +92,7 @@ export default function UpdateStudent() {
                                 </IconButton>
                             </React.Fragment>
                         } />}
-                        <img style={{ width: "400px", height: "400px" }} src={img} />
+                        <img style={{ width: "400px", height: "400px" }} src={img} alt=""/>
                         <Box sx={{ mt: 3 }}>
 
                             <Grid container direction="row"
