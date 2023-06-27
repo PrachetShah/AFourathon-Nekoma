@@ -9,14 +9,14 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import UpdateStudent from "./components/UpdateStudent";
 import { useNavigate } from "react-router-dom";
 
 const columns = [
-  { field: "id", headerName: "Student Id", width: 220 },
+  { field: "id", headerName: "Student Id", width: 180 },
   { field: "name", headerName: "Student Name", width: 220 },
-  { field: "email", headerName: "Email Address", width: 290 },
+  { field: "email", headerName: "Email Address", width: 250 },
   {
     field: "number",
     headerName: "Phone Number",
@@ -27,7 +27,8 @@ const columns = [
 export default function AllRecords() {
   let token = sessionStorage.getItem("token");
   const [rows, setRows] = React.useState([]);
-  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = React.useState(false);
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] =
+    React.useState(false);
   const [deleteStudentId, setDeleteStudentId] = React.useState(null);
 
   React.useEffect(() => {
@@ -71,7 +72,7 @@ export default function AllRecords() {
     }
   };
 
-  function Delete({ id, handleDelete }) {
+  function Delete({ id }) {
     const handleClick = () => {
       handleDeleteConfirmationOpen(id);
     };
@@ -86,10 +87,8 @@ export default function AllRecords() {
   const history = useNavigate();
   function Update({ id, name, email, number }) {
     const handleClick = () => {
-        //console.log(id, name, email);
-        let iddd
-      <UpdateStudent id={id} name={name} email={email} number={number}/>
-      history(`/updateStudent/${id}`)
+      <UpdateStudent id={id} name={name} email={email} number={number} />;
+      history(`/updateStudent/${id}`);
     };
 
     return (
@@ -115,7 +114,7 @@ export default function AllRecords() {
           {
             field: "delete",
             headerName: "Delete",
-            width: 120,
+            width: 140,
             renderCell: (params) => (
               <Delete id={params.row.id} handleDelete={handleDelete} />
             ),
@@ -123,9 +122,14 @@ export default function AllRecords() {
           {
             field: "update",
             headerName: "Update",
-            width: 120,
+            width: 140,
             renderCell: (params) => (
-              <Update id={params.row.id} name={params.row.name} email={params.row.email} number={params.row.number}/>
+              <Update
+                id={params.row.id}
+                name={params.row.name}
+                email={params.row.email}
+                number={params.row.number}
+              />
             ),
           },
         ]}
