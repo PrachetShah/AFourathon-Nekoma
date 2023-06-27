@@ -28,35 +28,37 @@ const Navbar = () => {
         </Link>
         <div className={`navbar-menu ${isOpen ? "active" : ""}`}>
           <ul className="navbar-items">
-            <li className="navbar-item">
-              <Link to="/" className="navbar-link" onClick={toggleNavbar}>
-                Home
-              </Link>
-            </li>
-            <li className="navbar-item">
-              <Link
-                to="/allRecords"
-                className="navbar-link"
-                onClick={toggleNavbar}
-              >
-                All Records
-              </Link>
-            </li>
-            <li className="navbar-item">
-              <Link
-                to="/studentDetail"
-                className="navbar-link"
-                onClick={toggleNavbar}
-              >
-                Add Students
-              </Link>
-            </li>
             {isToken ? (
-              <li className="navbar-item">
-                <Link to="/" className="navbar-link" onClick={removeToken}>
-                  Logout
-                </Link>
-              </li>
+              <>
+                <li className="navbar-item">
+                  <Link to="/" className="navbar-link" onClick={toggleNavbar}>
+                    Home
+                  </Link>
+                </li>
+                <li className="navbar-item">
+                  <Link
+                    to="/allRecords"
+                    className="navbar-link"
+                    onClick={toggleNavbar}
+                  >
+                    All Records
+                  </Link>
+                </li>
+                <li className="navbar-item">
+                  <Link
+                    to="/studentDetail"
+                    className="navbar-link"
+                    onClick={toggleNavbar}
+                  >
+                    Add Students
+                  </Link>
+                </li>
+                <li className="navbar-item">
+                  <Link to="/" className="navbar-link" onClick={removeToken}>
+                    Logout
+                  </Link>
+                </li>
+              </>
             ) : (
               <>
                 <li className="navbar-item">

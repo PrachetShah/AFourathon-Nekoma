@@ -37,22 +37,55 @@ export default function UpdateStudent() {
     // console.log()
 
     const editLog = async () => {
-        let formField = new FormData();
-        
-        formField.append("id", idd);
-        formField.append("name", name);
-        formField.append("email", email);
-        formField.append("number", number);
 
-        await axios({
-            method: "PUT",
-            url: `${url}student/${id}`,
-            headers: { Authorization: `Bearer ${token}` },
-            data: formField,
-        }).then((response) => {
-            console.log(response);
-            history("/allRecords");
-        });
+        // formField.append("id", idd);
+        // formField.append("name", name);
+        // formField.append("email", email);
+        // formField.append("number", number);
+        let config = {
+            "id": idd,
+            "name": name,
+            "email": email,
+            "number": number
+        }
+        try {
+            let result = await axios.put(
+                `${url}student/${id}`,
+                {
+                    // config
+                    id: idd,
+                    name: name,
+                    email: email,
+                    number: number
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        'Authorization': "Bearer" + " " + token
+                    },
+                }
+            );
+            console.log(result.data);
+            console.log(result.data.acccess_token);
+            if (result.data.message === "Student updated successfully") {
+                setErrorMessage('Student updated successfully');
+                setOpen(true);
+
+            }
+        } catch (error) {
+            console.log("Error" + error);
+            if (error.response) {
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                if (error.response.status == "401") {
+                    console.log(error.response.status)
+                    setErrorMessage('student already exists');
+                    setOpen(true);
+                }
+            }
+        }
     };
     return (
         <>
@@ -77,7 +110,7 @@ export default function UpdateStudent() {
                             style={{ alignItems: "flex", justifyContent: "center", marginTop: "10px", marginLeft: "36px", textAlign: 'center' }}
                         >
                             <Typography style={{ fontWeight: "800", fontSize: "30px" }}>
-                                Add Students
+                            Update Students
                             </Typography>
                         </Grid>
                         {errorMessage && <Snackbar open={open} message={errorMessage} onClose={handleToClose} action={
@@ -99,7 +132,7 @@ export default function UpdateStudent() {
                                 justifyContent="space-evenly"
                                 alignItems="flex-start" marginBottom={1}>
 
-                                <div style={{ fontWeight: "700", fontSize: "23px" }}>Add individual student record</div>
+                                <div style={{ fontWeight: "700", fontSize: "23px" }}>Update individual student record</div>
                             </Grid>
                             <Grid
                                 container direction="column"
