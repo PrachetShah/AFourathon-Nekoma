@@ -120,6 +120,7 @@ def get_admins():
 
     return jsonify(user_list), 200
 
+
 # STUDENT
 @app.route('/registerStudent', methods=['POST'])
 @jwt_required()
@@ -239,6 +240,7 @@ def edit_user(user_id):
         print(e)
         return jsonify({'message': 'Student with ID already exists'}), 401
 
+# Delete Student
 @app.route('/student/delete/<int:user_id>', methods=['PUT'])
 @jwt_required()
 def delete_user(user_id):
@@ -253,6 +255,7 @@ def delete_user(user_id):
         return jsonify({'message': 'Student deleted successfully'}), 200
     except Exception as e:
         return jsonify({'message': 'Unable to Delete Student'}), 401
+
 
 if __name__ == '__main__':
     # db.create_all()
