@@ -55,6 +55,20 @@ def hello_world():
 # ADMIN
 @app.route('/register', methods=['POST'])
 def create_user():
+    '''
+    Register Admin Route
+
+    Type of Req -> HTTP POST
+    application/json
+
+    Input Required Parameters for Correct Registeration:
+    >> name, email, number, password, userType in JSON Format
+
+    Output:
+    For Type of Requests -> 
+    >> Status: 200, Admin Created Successfully
+    >> Status: 401, Admin with given Email already exists
+    '''
     data = request.get_json()
     # name, email, number, userType = data['name'], data['email'], data['number'], data['userType']
     email = data['email']
@@ -82,6 +96,21 @@ def create_user():
 
 @app.route('/login', methods=['POST'])
 def login_user():
+    '''
+    Login Admin Route
+
+    Type of Req -> HTTP POST
+    application/json
+
+    Input Required Parameters for Correct Registeration:
+    >> email, password in JSON Format
+
+    Output:
+    For Type of Requests -> 
+    >> Status: 200, JWT Token sent for authorization, Successful Login
+    >> Status: 401, Wrong Credentials, check Email/Password Again
+    >> Status: 404, Admin does not exist, Register Admin
+    '''
     data = request.get_json()
     # name, email, number, userType = data['name'], data['email'], data['number'], data['userType']
     email = data['email']
@@ -106,6 +135,14 @@ def login_user():
 @app.route('/getAdmins')
 @jwt_required()
 def get_admins():
+    '''
+    Get All Registered Admins from DB
+
+    Type of Req -> HTTP GET
+
+    Output:
+    >> Status: 200, List of all Admins Registered for Site
+    '''
     current_user = get_jwt_identity()
     users = Admin.query.all()
     user_list = []
@@ -177,6 +214,14 @@ def create_students():
 @app.route('/getStudents')
 @jwt_required()
 def get_students():
+    '''
+    Get All Registered Stdeunts from DB
+
+    Type of Req -> HTTP GET
+
+    Output:
+    >> Status: 200, List of all Students Registered
+    '''
     users = Student.query.all()
     user_list = []
     for user in users:
@@ -195,6 +240,18 @@ def get_students():
 @app.route('/retrieve/<int:user_id>', methods=['GET'])
 @jwt_required()
 def retreive_one(user_id):
+    '''
+    Get Selected Student from DB using Student ID
+
+    Type of Req -> HTTP GET
+
+    Input:
+    >> Student ID as a Param in URL
+
+    Output:
+    >> Status: 200, Details of Student with user_id
+    >> Status: 404, User Not Found
+    '''
     user = Student.query.get(user_id)
     if not user:
         return jsonify({'message': 'User not found'}), 404
