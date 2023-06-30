@@ -140,6 +140,9 @@ def get_admins():
 
     Type of Req -> HTTP GET
 
+    Input:
+    >> JWT Token for Autorization in Headers
+
     Output:
     >> Status: 200, List of all Admins Registered for Site
     '''
@@ -162,6 +165,21 @@ def get_admins():
 @app.route('/registerStudent', methods=['POST'])
 @jwt_required()
 def create_student():
+    '''
+    Register Student Route
+
+    Type of Req -> HTTP POST
+    application/json
+
+    Input Required Parameters for Correct Registeration:
+    >> email, student_id, name, number in JSON Format
+    >> JWT Token for Autorization in Headers
+
+    Output:
+    For Type of Requests -> 
+    >> Status: 200, Student Created Succesfully
+    >> Status: 401, Student Already Exists
+    '''
     data = request.get_json()
     id = data['id']
     exists = db.session.query(db.exists().where(Student.id == data['id'])).scalar()
@@ -219,6 +237,9 @@ def get_students():
 
     Type of Req -> HTTP GET
 
+    Input:
+    >> JWT Token for Autorization in Headers
+
     Output:
     >> Status: 200, List of all Students Registered
     '''
@@ -247,6 +268,7 @@ def retreive_one(user_id):
 
     Input:
     >> Student ID as a Param in URL
+    >> JWT Token for Autorization in Headers
 
     Output:
     >> Status: 200, Details of Student with user_id
