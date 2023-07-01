@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
+import logo from '../../assets/logo for af.png';
 
 const Navbar = () => {
   let token = sessionStorage.getItem("token");
@@ -24,7 +25,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          Logo
+          <img style={{ width: "100px", height: "85px" }} src={logo} /><span >Student Detail App</span>
         </Link>
         <div className={`navbar-menu ${isOpen ? "active" : ""}`}>
           <ul className="navbar-items">
@@ -83,9 +84,7 @@ const Navbar = () => {
           className={`navbar-toggle ${isOpen ? "active" : ""}`}
           onClick={toggleNavbar}
         >
-          <div className="bar" />
-          <div className="bar" />
-          <div className="bar" />
+
         </div>
       </div>
     </nav>
