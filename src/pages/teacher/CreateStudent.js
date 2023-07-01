@@ -14,8 +14,7 @@ import axios from "axios";
 import { url } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import img from "../../assets/createstudent.svg";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 export default function CreateStudent() {
   let token = sessionStorage.getItem("token");
@@ -42,13 +41,13 @@ export default function CreateStudent() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      id: data.get("id"),
-      name: data.get("name"),
-      email: data.get("email"),
-      number: data.get("number"),
-    });
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   id: data.get("id"),
+    //   name: data.get("name"),
+    //   email: data.get("email"),
+    //   number: data.get("number"),
+    // });
     createLog();
   };
   async function createLog() {
@@ -143,91 +142,104 @@ export default function CreateStudent() {
               />
             )}
             <img style={{ width: "400px", height: "400px" }} src={img} alt="" />
-            <Box
+            <ValidatorForm
               component="form"
               onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 3 }}
+            //onError={errors => console.log(errors)}
+            //noValidate
             >
-              <FileInput />
+              <Box
+                //component="form"
+                // onSubmit={handleSubmit}
+                // noValidate
+                sx={{ mt: 3 }}
+              >
+                <FileInput />
 
-              <Grid
-                container
-                direction="row"
-                justifyContent="space-evenly"
-                alignItems="flex-start"
-                marginBottom={1}
-              >
-                <div style={{ fontWeight: "700", fontSize: "23px" }}>
-                  Add individual student record
-                </div>
-              </Grid>
-              <Grid
-                container
-                direction="column"
-                justifyContent="space-evenly"
-                alignItems="flex-start"
-                marginBottom={1}
-              >
-                <TextField
-                  margin="normal"
-                  required
-                  type="number"
-                  style={{ boxColor: "black", width: "60vh" }}
-                  id="id"
-                  label="Student ID"
-                  name="id"
-                  value={values.id}
-                  onChange={handleChanges}
-                  autoComplete="id"
-                  autoFocus
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  type="text"
-                  style={{ boxColor: "black", width: "60vh" }}
-                  id="name"
-                  label="Name"
-                  name="name"
-                  value={values.name}
-                  onChange={handleChanges}
-                  autoComplete="name"
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  style={{ boxColor: "black", width: "60vh" }}
-                  id="email"
-                  label="Email"
-                  type="email"
-                  name="email"
-                  value={values.email}
-                  onChange={handleChanges}
-                  autoComplete="email"
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  type="tel"
-                  id="number"
-                  label="Number"
-                  name="number"
-                  value={values.number}
-                  onChange={handleChanges}
-                  autoComplete="number"
-                  style={{ boxColor: "black", width: "60vh" }}
-                />
-                <Button
-                  type="submit"
-                  variant="contained"
-                  sx={{ mt: 5, ml: 20 }}
-                  style={{ backgroundColor: "black", color: "white" }}
+                <Grid
+                  container
+                  direction="row"
+                  justifyContent="space-evenly"
+                  alignItems="flex-start"
+                  marginBottom={1}
                 >
-                  Create Record
-                </Button>
-              </Grid>
-            </Box>
+                  <div style={{ fontWeight: "700", fontSize: "23px" }}>
+                    Add individual student record
+                  </div>
+                </Grid>
+                <Grid
+                  container
+                  direction="column"
+                  justifyContent="space-evenly"
+                  alignItems="flex-start"
+                  marginBottom={1}
+                >
+                  <TextValidator
+                    label="Student ID"
+                    margin="normal"
+
+                    name="id"
+                    value={values.id}
+                    validators={['required']}
+                    errorMessages={['this field is required']}
+
+                    style={{ boxColor: "black", width: "60vh" }}
+
+                    onChange={handleChanges}
+
+                  />
+                  <TextValidator
+                    label="Name"
+
+                    name="name"
+                    value={values.name}
+                    validators={['required']}
+                    errorMessages={['this field is required']}
+                    margin="normal"
+
+                    style={{ boxColor: "black", width: "60vh" }}
+
+                    onChange={handleChanges}
+                    autoComplete="name"
+                  />
+                  <TextValidator
+                    label="Email"
+
+                    name="email"
+                    value={values.email}
+                    validators={['required', 'isEmail']}
+                    errorMessages={['this field is required', 'email is not valid']}
+                    margin="normal"
+
+                    style={{ boxColor: "black", width: "60vh" }}
+
+                    onChange={handleChanges}
+                    autoComplete="email"
+                  />
+                  <TextValidator
+                    label="Phone Number"
+
+                    name="number"
+                    value={values.number}
+                    validators={['required']}
+                    errorMessages={['this field is required']}
+                    margin="normal"
+
+                    onChange={handleChanges}
+
+                    style={{ boxColor: "black", width: "60vh" }}
+                  />
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{ mt: 5, ml: 20 }}
+                    style={{ backgroundColor: "black", color: "white" }}
+                  >
+                    Create Record
+                  </Button>
+                </Grid>
+              </Box>
+            </ValidatorForm>
           </Grid>
         </Grid>
       </div>
