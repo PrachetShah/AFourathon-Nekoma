@@ -228,7 +228,6 @@ def create_students():
 
     messages = []
     for index, row in df.iterrows():
-        # print(row["id"], row["name"], row["email"])
         id = row['id']
         exists = db.session.query(db.exists().where(Student.id == row['id'])).scalar()
         print(id, " : ", exists)
@@ -305,6 +304,20 @@ def retreive_one(user_id):
 @app.route('/student/<int:user_id>', methods=['PUT'])
 @jwt_required()
 def edit_user(user_id):
+    '''
+    Update Selected Student from DB using Student ID
+
+    Type of Req -> HTTP PUT
+
+    Input:
+    >> Student ID as a Param in URL
+    >> JWT Token for Autorization in Headers
+
+    Output:
+    >> Status: 200, Student Updated Successfully
+    >> Status: 401, Student already exists
+    >> Status: 404, User Not Found
+    '''
     user = Student.query.get(user_id)
 
     if not user:
@@ -338,6 +351,20 @@ def edit_user(user_id):
 @app.route('/student/delete/<int:user_id>', methods=['PUT'])
 @jwt_required()
 def delete_user(user_id):
+    '''
+    Delete Selected Student from DB using Student ID
+
+    Type of Req -> HTTP PUT
+
+    Input:
+    >> Student ID as a Param in URL
+    >> JWT Token for Autorization in Headers
+
+    Output:
+    >> Status: 200, Student Deleted Successfully
+    >> Status: 401, Unable to delete Student already
+    >> Status: 404, User Not Found
+    '''
     user = Student.query.get(user_id)
 
     if not user:
