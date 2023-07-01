@@ -3,7 +3,6 @@ import { useState } from "react";
 import {
   Grid,
   Typography,
-  TextField,
   Button,
   Box,
   Snackbar,
@@ -41,13 +40,6 @@ export default function CreateStudent() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // console.log({
-    //   id: data.get("id"),
-    //   name: data.get("name"),
-    //   email: data.get("email"),
-    //   number: data.get("number"),
-    // });
     createLog();
   };
   async function createLog() {
@@ -145,13 +137,8 @@ export default function CreateStudent() {
             <ValidatorForm
               component="form"
               onSubmit={handleSubmit}
-            //onError={errors => console.log(errors)}
-            //noValidate
             >
               <Box
-                //component="form"
-                // onSubmit={handleSubmit}
-                // noValidate
                 sx={{ mt: 3 }}
               >
                 <FileInput />
