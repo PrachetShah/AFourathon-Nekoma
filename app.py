@@ -198,6 +198,21 @@ def create_student():
 @app.route('/registerBulk', methods=['POST'])
 @jwt_required()
 def create_students():
+    '''
+    Register Multiple Students Route
+
+    Type of Req -> HTTP POST
+    application/json
+
+    Input Required Parameters for Correct Registeration:
+    >> Excel file containing student details in specified format
+    >> JWT Token for Autorization in Headers
+
+    Output:
+    For Type of Requests -> 
+    >> Status: 200, Students created succesfully with all the individual messages for each addition in DB
+    >> Status: 404, File not received
+    '''
     data = request.files['file']
     name = secure_filename(data.filename)
 
