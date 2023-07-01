@@ -164,7 +164,7 @@ export default function CreateStudent() {
                   <TextValidator
                     label="Student ID"
                     margin="normal"
-
+                    type="number"
                     name="id"
                     value={values.id}
                     validators={['required']}
@@ -211,7 +211,7 @@ export default function CreateStudent() {
                     validators={['required']}
                     errorMessages={['this field is required']}
                     margin="normal"
-
+                    type="number"
                     onChange={handleChanges}
 
                     style={{ boxColor: "black", width: "60vh" }}

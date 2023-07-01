@@ -172,7 +172,7 @@ export default function UpdateStudent() {
                                         margin="normal"
                                         validators={['required']}
                                         errorMessages={['this field is required']}
-
+                                        type="number"
                                         style={{ boxColor: "black", width: "60vh" }}
                                         name="id"
                                         value={idd}
@@ -205,6 +205,7 @@ export default function UpdateStudent() {
                                         validators={['required']}
                                         errorMessages={['this field is required']}
                                         value={number}
+                                        type="number"
                                         onChange={(e) => setNumber(e.target.value)}
                                         style={{ boxColor: "black", width: "60vh" }}
                                     />
