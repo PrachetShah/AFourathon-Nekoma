@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { url } from "../../utils/api";
@@ -12,6 +12,8 @@ import Button from "@mui/material/Button";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import UpdateStudent from "./components/UpdateStudent";
 import { useNavigate } from "react-router-dom";
+import { Steps } from "intro.js-react";
+import "intro.js/introjs.css";
 
 const columns = [
   { field: "id", headerName: "Student Id", width: 180 },
@@ -26,12 +28,19 @@ const columns = [
 
 export default function AllRecords() {
   let token = sessionStorage.getItem("token");
-  const [rows, setRows] = React.useState([]);
-  const [deleteConfirmationOpen, setDeleteConfirmationOpen] =
-    React.useState(false);
-  const [deleteStudentId, setDeleteStudentId] = React.useState(null);
+  const [rows, setRows] = useState([]);
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+  const [deleteStudentId, setDeleteStudentId] = useState(null);
+  const [stepsEnabled, setStepsEnabled] = useState(true);
+  const [initialStep] = useState(0);
+  const [steps, setSteps] = useState([
+    {
+      element: ".header-cell",
+      intro: "Click on the column name to get more options!",
+    },
+  ]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     axios
       .get(url + "getStudents", {
         headers: { Authorization: `Bearer ${token}` },
@@ -98,6 +107,7 @@ export default function AllRecords() {
       ></ModeEditIcon>
     );
   }
+
   return (
     <div
       style={{
@@ -107,6 +117,12 @@ export default function AllRecords() {
         marginTop: "0.5%",
       }}
     >
+      <Steps
+        enabled={stepsEnabled}
+        steps={steps}
+        initialStep={initialStep}
+        onExit={() => setStepsEnabled(false)}
+      />
       <DataGrid
         rows={rows}
         columns={[
