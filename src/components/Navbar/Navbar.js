@@ -71,7 +71,7 @@ const Navbar = () => {
                 <li className="navbar-item">
                   <Link
                     to="/register"
-                    className="navbar-link-signup"
+                    className="navbar-link"
                     onClick={toggleNavbar}
                   >
                     Sign up
