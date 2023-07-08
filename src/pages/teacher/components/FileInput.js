@@ -82,7 +82,7 @@ export default function FileInput() {
         >
           <div style={{ fontWeight: "650", fontSize: "18px" }}>
             CSV file must follow this format{" "}
-            <a href={samplescsv} stye={{ fontWeight: "650" }} target="_blank">
+            <a href={samplescsv} stye={{ fontWeight: "650" }} rel="noreferrer">
               <Button>Download CSV</Button>
             </a>
           </div>
