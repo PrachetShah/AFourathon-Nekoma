@@ -73,7 +73,13 @@ export default function CreateStudent() {
       } else {
         setErrorMessage("Please fill all details");
       }
-    } catch (error) {
+    }
+    //Unit test 3
+    // Student ID: number with 10 digits in the format 60004200011
+    // Name: string with letters and white space
+    // Email: string in the format xxxxxx @domain_name.com
+    // Phone Number: 10 digit number 
+    catch (error) {
       console.log("Error" + error);
       if (error.response) {
         if (error.response.status == "401") {
