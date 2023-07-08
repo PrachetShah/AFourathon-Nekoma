@@ -16,7 +16,7 @@ import axios from "axios";
 import { url } from "../utils/api";
 import { Link } from "react-router-dom";
 import { Snackbar, IconButton } from "@mui/material";
-import login from "../assets/login.svg";
+import signup from "../assets/signup.svg";
 
 const theme = createTheme();
 
@@ -77,7 +77,7 @@ export default function TeacherRegister() {
         setErrorMessage("Registration successful");
         setOpen(true);
         sessionStorage.setItem("token", result.data.token);
-        // history("/login")
+        history("/login")
       }
     } catch (error) {
       console.log("Error" + error);
@@ -101,8 +101,9 @@ export default function TeacherRegister() {
           sm={4}
           md={6}
           sx={{
-            backgroundImage: `url(${login})`,
+            backgroundImage: `url(${signup})`,
             backgroundRepeat: "no-repeat",
+            backgroundSize:"90%",
             backgroundColor: (t) =>
               t.palette.mode === "light"
                 ? t.palette.grey[50]

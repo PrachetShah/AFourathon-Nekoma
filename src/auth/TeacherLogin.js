@@ -91,6 +91,7 @@ export default function TeacherLogin() {
           sx={{
             backgroundImage: `url(${login})`,
             backgroundRepeat: "no-repeat",
+            backgroundSize:"80%",
             backgroundColor: (t) =>
               t.palette.mode === "light"
                 ? t.palette.grey[50]
