@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import error from "../assets/error.png";
 
 const NotFound = () => {
+  let token = sessionStorage.getItem("token");
+  let isToken = false;
+  if (token) {
+    isToken = true;
+  }
   return (
     <div style={{ height: "86vh", paddingTop: "100px" }}>
       <center>
@@ -15,15 +20,27 @@ const NotFound = () => {
             We couldn't find what you are looking for
           </h2>
           <br />
-          <Link style={{ textDecoration: "none" }} to="/login">
-            <Button
-              width="40px"
-              variant="contained"
-              style={{ backgroundColor: "black" }}
-            >
-              Try Again!
-            </Button>
-          </Link>
+          {isToken ? (
+            <Link style={{ textDecoration: "none" }} to="/">
+              <Button
+                width="40px"
+                variant="contained"
+                style={{ backgroundColor: "black" }}
+              >
+                Try Again!
+              </Button>
+            </Link>
+          ) : (
+            <Link style={{ textDecoration: "none" }} to="/login">
+              <Button
+                width="40px"
+                variant="contained"
+                style={{ backgroundColor: "black" }}
+              >
+                Try Again!
+              </Button>
+            </Link>
+          )}
         </div>
       </center>
     </div>
