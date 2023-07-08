@@ -80,7 +80,14 @@ export default function AllRecords() {
         });
     }
   };
+  // test case 7
+  // delete
+  // id: 60004200075
+  // name: Riddhi
+  // email: riddhi @gmai
+  // number: 9867485908
 
+  // result: record should be erased from database
   function Delete({ id }) {
     const handleClick = () => {
       handleDeleteConfirmationOpen(id);
