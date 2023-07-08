@@ -141,7 +141,7 @@ def get_admins():
     Type of Req -> HTTP GET
 
     Input:
-    >> JWT Token for Autorization in Headers
+    >> JWT Token for Authorization in Headers
 
     Output:
     >> Status: 200, List of all Admins Registered for Site
@@ -173,7 +173,7 @@ def create_student():
 
     Input Required Parameters for Correct Registeration:
     >> email, student_id, name, number in JSON Format
-    >> JWT Token for Autorization in Headers
+    >> JWT Token for Authorization in Headers
 
     Output:
     For Type of Requests -> 
@@ -206,7 +206,7 @@ def create_students():
 
     Input Required Parameters for Correct Registeration:
     >> Excel file containing student details in specified format
-    >> JWT Token for Autorization in Headers
+    >> JWT Token for Authorization in Headers
 
     Output:
     For Type of Requests -> 
@@ -282,7 +282,7 @@ def retreive_one(user_id):
 
     Input:
     >> Student ID as a Param in URL
-    >> JWT Token for Autorization in Headers
+    >> JWT Token for Authorization in Headers
 
     Output:
     >> Status: 200, Details of Student with user_id
@@ -362,7 +362,7 @@ def delete_user(user_id):
 
     Output:
     >> Status: 200, Student Deleted Successfully
-    >> Status: 401, Unable to delete Student already
+    >> Status: 401, Unable to delete Student
     >> Status: 404, User Not Found
     '''
     user = Student.query.get(user_id)
