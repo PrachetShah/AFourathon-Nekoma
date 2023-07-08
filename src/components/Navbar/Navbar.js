@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import logo from '../../assets/logo for af.png';
+import SchoolIcon from '@mui/icons-material/School';
 
 const Navbar = () => {
   let token = sessionStorage.getItem("token");
@@ -25,7 +25,8 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <img style={{ width: "100px", height: "85px" }} src={logo} /><span >Student Detail App</span>
+          {/* <img style={{ width: "100px", height: "85px" }} src={logo} /><span >Student Detail App</span> */}
+          <SchoolIcon style={{ width: "45px", height: "45px", paddingRight:"10px" }}/><span>Student Detail App</span>
         </Link>
         <div className={`navbar-menu ${isOpen ? "active" : ""}`}>
           <ul className="navbar-items">
