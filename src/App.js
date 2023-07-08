@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React from 'react';
-
 import Homepage from './pages/homepage/Homepage';
 import TeacherLogin from './auth/TeacherLogin';
 import TeacherRegister from './auth/TeacherRegister';
@@ -9,6 +8,7 @@ import Navbar from './components/Navbar/Navbar';
 import CreateStudent from './pages/teacher/CreateStudent';
 import AllRecords from './pages/teacher/AllRecords';
 import UpdateStudent from './pages/teacher/components/UpdateStudent';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
         <Route path="/studentDetail" exact element={<><Navbar/><CreateStudent/></>} />
         <Route path="/allRecords" exact element={<><Navbar/><AllRecords/></>} />
         <Route path="/updateStudent/:id" exact element={<><Navbar/><UpdateStudent /></>} />
+        <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </div>
