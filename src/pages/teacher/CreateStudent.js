@@ -139,6 +139,11 @@ export default function CreateStudent() {
               />
             )}
             <img style={{ width: "400px", height: "400px" }} src={img} alt="" />
+            {/* test Case 2
+             Student ID: number with 10 digits in the format 6000xx000xx
+            Name:
+            Email: string in the format xxxxxx@domain_name.com
+            Phone Number: */}
             <ValidatorForm
               component="form"
               onSubmit={handleSubmit}
