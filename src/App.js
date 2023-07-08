@@ -11,17 +11,28 @@ import UpdateStudent from './pages/teacher/components/UpdateStudent';
 import NotFound from './components/NotFound';
 
 function App() {
+  let token = sessionStorage.getItem("token");
+  let isToken = false;
+  if (token) {
+    isToken = true;
+  }
   return (
     <div className="App">
       <Router>
         <Routes>
-        <Route path="/" exact element={<><Navbar/><Homepage/></>} />
-        <Route path="/login" exact element={<><TeacherLogin/></>} />
-        <Route path="/register" exact element={<><TeacherRegister/></>} />
-        <Route path="/studentDetail" exact element={<><Navbar/><CreateStudent/></>} />
-        <Route path="/allRecords" exact element={<><Navbar/><AllRecords/></>} />
-        <Route path="/updateStudent/:id" exact element={<><Navbar/><UpdateStudent /></>} />
-        <Route path="*" element={<NotFound />} />
+          <Route path="/" exact element={<><Navbar /><Homepage /></>} />
+          <Route path="/login" exact element={<><TeacherLogin /></>} />
+          <Route path="/register" exact element={<><TeacherRegister /></>} />
+          {isToken ?
+            (
+              <>
+                <Route path="/studentDetail" exact element={<><Navbar /><CreateStudent /></>} />
+                <Route path="/allRecords" exact element={<><Navbar /><AllRecords /></>} />
+                <Route path="/updateStudent/:id" exact element={<><Navbar /><UpdateStudent /></>} />
+              </>) :
+            (<Route path="*" element={<NotFound />} />)}
+
+
         </Routes>
       </Router>
     </div>
