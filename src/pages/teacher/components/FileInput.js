@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Snackbar, IconButton, Button, Grid } from "@mui/material";
 import { saveAs } from 'file-saver';
-import samplescsv from '../../../assets/template.csv';
+import samplescsv from '../../../assets/template.xlsx';
 import "./FileInput.css";
 
 export default function FileInput() {
@@ -75,9 +75,9 @@ export default function FileInput() {
           <input type="file" id="input-img" onChange={handleSubmit} />
         </Button>
         <Grid container direction="row" justifyContent="center" alignItems="flex">
-          <div style={{ fontWeight: "620", fontSize: "18px" }}>
+          <div style={{ fontWeight: "650", fontSize: "18px" }}>
             CSV file must follow this format{" "}
-            <a href={samplescsv} target="_blank">
+            <a href={samplescsv} stye={{fontWeight: "650",}} target="_blank">
               <Button>
                 Download CSV
               </Button>
