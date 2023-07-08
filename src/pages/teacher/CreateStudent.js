@@ -97,7 +97,7 @@ export default function CreateStudent() {
         <Grid
           container
           direction="row"
-          justifyContent="center"
+          justifyContent=""
           alignItems="flex"
         >
           <Grid
@@ -117,7 +117,7 @@ export default function CreateStudent() {
                 alignItems: "flex",
                 justifyContent: "center",
                 marginTop: "10px",
-                marginLeft: "36px",
+                //marginLeft: "36px",
                 textAlign: "center",
               }}
             >
@@ -150,15 +150,15 @@ export default function CreateStudent() {
             Name:
             Email: string in the format xxxxxx@domain_name.com
             Phone Number: */}
-            <ValidatorForm
-              component="form"
-              onSubmit={handleSubmit}
-            >
-              <Box
-                sx={{ mt: 3 }}
-              >
-                <FileInput />
 
+            <Box
+              sx={{ mt: 3 }}
+            >
+              <FileInput />
+              <ValidatorForm
+                component="form"
+                onSubmit={handleSubmit}
+              >
                 <Grid
                   container
                   direction="row"
@@ -174,7 +174,7 @@ export default function CreateStudent() {
                   container
                   direction="column"
                   justifyContent="space-evenly"
-                  alignItems="flex-start"
+                  alignItems="center"
                   marginBottom={1}
                 >
                   <TextValidator
@@ -235,14 +235,15 @@ export default function CreateStudent() {
                   <Button
                     type="submit"
                     variant="contained"
-                    sx={{ mt: 5, ml: 20 }}
+                    sx={{ mt: 5, ml: 2 }}
                     style={{ backgroundColor: "black", color: "white" }}
                   >
                     Create Record
                   </Button>
                 </Grid>
-              </Box>
-            </ValidatorForm>
+              </ValidatorForm>
+            </Box>
+
           </Grid>
         </Grid>
       </div>
