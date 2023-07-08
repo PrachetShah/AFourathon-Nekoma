@@ -13,7 +13,7 @@ import axios from "axios";
 import { url } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import img from "../../assets/createstudent.svg";
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 export default function CreateStudent() {
   let token = sessionStorage.getItem("token");
@@ -43,7 +43,7 @@ export default function CreateStudent() {
     createLog();
   };
   async function createLog() {
-    // Unit test 1 
+    // Unit test 1
     // Student ID: number with 10 digits in the format 6000xx000xx
     // Name: string with letters and white space
     // Email: string in the format xxxxxx @domain_name.com
@@ -73,13 +73,12 @@ export default function CreateStudent() {
       } else {
         setErrorMessage("Please fill all details");
       }
-    }
-    //Unit test 3
-    // Student ID: number with 10 digits in the format 60004200011
-    // Name: string with letters and white space
-    // Email: string in the format xxxxxx @domain_name.com
-    // Phone Number: 10 digit number 
-    catch (error) {
+    } catch (error) {
+      //Unit test 3
+      // Student ID: number with 10 digits in the format 60004200011
+      // Name: string with letters and white space
+      // Email: string in the format xxxxxx @domain_name.com
+      // Phone Number: 10 digit number
       console.log("Error" + error);
       if (error.response) {
         if (error.response.status == "401") {
@@ -150,13 +149,8 @@ export default function CreateStudent() {
             Name:
             Email: string in the format xxxxxx@domain_name.com
             Phone Number: */}
-            <ValidatorForm
-              component="form"
-              onSubmit={handleSubmit}
-            >
-              <Box
-                sx={{ mt: 3 }}
-              >
+            <ValidatorForm component="form" onSubmit={handleSubmit}>
+              <Box sx={{ mt: 3 }}>
                 <FileInput />
 
                 <Grid
@@ -183,53 +177,45 @@ export default function CreateStudent() {
                     type="number"
                     name="id"
                     value={values.id}
-                    validators={['required']}
-                    errorMessages={['this field is required']}
-
+                    validators={["required"]}
+                    errorMessages={["this field is required"]}
                     style={{ boxColor: "black", width: "60vh" }}
-
                     onChange={handleChanges}
-
                   />
                   <TextValidator
                     label="Name"
-
                     name="name"
                     value={values.name}
-                    validators={['required']}
-                    errorMessages={['this field is required']}
+                    validators={["required"]}
+                    errorMessages={["this field is required"]}
                     margin="normal"
-
                     style={{ boxColor: "black", width: "60vh" }}
-
                     onChange={handleChanges}
                     autoComplete="name"
                   />
                   <TextValidator
                     label="Email"
-
                     name="email"
                     value={values.email}
-                    validators={['required', 'isEmail']}
-                    errorMessages={['this field is required', 'email is not valid']}
+                    validators={["required", "isEmail"]}
+                    errorMessages={[
+                      "this field is required",
+                      "email is not valid",
+                    ]}
                     margin="normal"
-
                     style={{ boxColor: "black", width: "60vh" }}
-
                     onChange={handleChanges}
                     autoComplete="email"
                   />
                   <TextValidator
                     label="Phone Number"
-
                     name="number"
                     value={values.number}
-                    validators={['required']}
-                    errorMessages={['this field is required']}
+                    validators={["required"]}
+                    errorMessages={["this field is required"]}
                     margin="normal"
                     type="number"
                     onChange={handleChanges}
-
                     style={{ boxColor: "black", width: "60vh" }}
                   />
                   <Button
