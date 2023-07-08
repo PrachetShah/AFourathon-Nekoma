@@ -52,6 +52,14 @@ export default function UpdateStudent() {
             email: email,
             number: number,
         };
+        // test case 5
+        // id: 60004200075
+        // name: Riddhi
+        // email: riddhi @gmai
+        // number: 9867485
+
+        // update the above with
+        // number: 9867485908
         try {
             let result = await axios.put(
                 `${url}student/${id}`,
@@ -145,8 +153,8 @@ export default function UpdateStudent() {
                         <img style={{ width: "400px", height: "400px" }} src={img} alt="" />
                         <ValidatorForm
                             component="form"
-                            // onSubmit={handleSubmit}
-                            
+                        // onSubmit={handleSubmit}
+
                         >
                             <Box sx={{ mt: 3 }}>
                                 <Grid
