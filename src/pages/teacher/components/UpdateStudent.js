@@ -1,13 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {
-  Grid,
-  Typography,
-  TextField,
-  Button,
-  Box,
-  Snackbar,
-  IconButton,
+    Grid,
+    Typography,
+    TextField,
+    Button,
+    Box,
+    Snackbar,
+    IconButton,
 } from "@mui/material";
 import axios from "axios";
 import { url } from "../../../utils/api";
@@ -16,33 +16,33 @@ import img from "../../../assets/createstudent.svg";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 export default function UpdateStudent() {
-  let token = sessionStorage.getItem("token");
-  const { id } = useParams();
-  const [errorMessage, setErrorMessage] = useState(""); //for alert
-  const [open, setOpen] = useState(false);
-  const [idd, setId] = useState();
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [number, setNumber] = useState();
-  const history = useNavigate();
+    let token = sessionStorage.getItem("token");
+    const { id } = useParams();
+    const [errorMessage, setErrorMessage] = useState(""); //for alert
+    const [open, setOpen] = useState(false);
+    const [idd, setId] = useState();
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
+    const [number, setNumber] = useState();
+    const history = useNavigate();
 
-  const handleToClose = (event, reason) => {
-    if ("clickaway" === reason) return;
-    setOpen(false);
-    history("/allRecords");
-  };
-  useEffect(() => {
-    let updateStudent = async () => {
-      const result = await axios.get(`${url}retrieve/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setName(result.data.name);
-      setId(result.data.id);
-      setEmail(result.data.email);
-      setNumber(result.data.number);
+    const handleToClose = (event, reason) => {
+        if ("clickaway" === reason) return;
+        setOpen(false);
+        history("/allRecords");
     };
-    updateStudent();
-  }, [id]);
+    useEffect(() => {
+        let updateStudent = async () => {
+            const result = await axios.get(`${url}retrieve/${id}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            setName(result.data.name);
+            setId(result.data.id);
+            setEmail(result.data.email);
+            setNumber(result.data.number);
+        };
+        updateStudent();
+    }, [id]);
 
     const editLog = async () => {
         let config = {
@@ -82,7 +82,16 @@ export default function UpdateStudent() {
                 setErrorMessage("Student updated successfully");
                 setOpen(true);
             }
-        } catch (error) {
+        }
+        // test case 6
+        // d: 60004200075
+        // name: Riddhi
+        // email: riddhi @gmai
+        // number: 9867485
+
+        // update the above with said: 60004200010
+        // result: snackbar message "student already exists" 
+        catch (error) {
             console.log("Error" + error);
             if (error.response) {
                 console.log(error.response.data);
