@@ -42,9 +42,10 @@ export default function HomePage() {
                 }}
               >
                 In this student portal, you can access various features such as
-                viewing your course materials, submitting assignments, checking
-                grades, and more. Take full advantage of the resources available
-                here and make the most out of your learning journey!
+                adding individual student, adding many students through excel
+                sheet, deleting and updating student information. Take full
+                advantage of the resources available here and make the most out
+                of it!
               </Typography>
             </Grid>
             <br />
