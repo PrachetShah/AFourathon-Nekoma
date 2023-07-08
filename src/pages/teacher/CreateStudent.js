@@ -43,6 +43,11 @@ export default function CreateStudent() {
     createLog();
   };
   async function createLog() {
+    // Unit test 1 
+    // Student ID: number with 10 digits in the format 6000xx000xx
+    // Name: string with letters and white space
+    // Email: string in the format xxxxxx @domain_name.com
+    // Phone Number: 10 digit number
     try {
       let result = await axios.post(
         url + "registerStudent",
