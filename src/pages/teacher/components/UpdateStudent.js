@@ -1,49 +1,48 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {
-    Grid,
-    Typography,
-    TextField,
-    Button,
-    Box,
-    Snackbar,
-    IconButton,
+  Grid,
+  Typography,
+  TextField,
+  Button,
+  Box,
+  Snackbar,
+  IconButton,
 } from "@mui/material";
 import axios from "axios";
 import { url } from "../../../utils/api";
 import { useParams, useNavigate } from "react-router-dom";
 import img from "../../../assets/createstudent.svg";
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 export default function UpdateStudent() {
-    let token = sessionStorage.getItem("token");
-    const { id } = useParams();
-    const [errorMessage, setErrorMessage] = useState(""); //for alert
-    const [open, setOpen] = useState(false);
-    const [idd, setId] = useState();
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
-    const [number, setNumber] = useState();
-    const history = useNavigate();
+  let token = sessionStorage.getItem("token");
+  const { id } = useParams();
+  const [errorMessage, setErrorMessage] = useState(""); //for alert
+  const [open, setOpen] = useState(false);
+  const [idd, setId] = useState();
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [number, setNumber] = useState();
+  const history = useNavigate();
 
-
-    const handleToClose = (event, reason) => {
-        if ("clickaway" === reason) return;
-        setOpen(false);
-        history("/allRecords");
+  const handleToClose = (event, reason) => {
+    if ("clickaway" === reason) return;
+    setOpen(false);
+    history("/allRecords");
+  };
+  useEffect(() => {
+    let updateStudent = async () => {
+      const result = await axios.get(`${url}retrieve/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setName(result.data.name);
+      setId(result.data.id);
+      setEmail(result.data.email);
+      setNumber(result.data.number);
     };
-    useEffect(() => {
-        let updateStudent = async () => {
-            const result = await axios.get(`${url}retrieve/${id}`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            setName(result.data.name);
-            setId(result.data.id);
-            setEmail(result.data.email);
-            setNumber(result.data.number);
-        };
-        updateStudent();
-    }, [id]);
+    updateStudent();
+  }, [id]);
 
     const editLog = async () => {
         let config = {

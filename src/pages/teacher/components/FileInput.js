@@ -4,8 +4,8 @@ import { url } from "../../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Snackbar, IconButton, Button, Grid } from "@mui/material";
-import { saveAs } from 'file-saver';
-import samplescsv from '../../../assets/template.xlsx';
+import { saveAs } from "file-saver";
+import samplescsv from "../../../assets/template.xlsx";
 import "./FileInput.css";
 
 export default function FileInput() {
@@ -74,18 +74,24 @@ export default function FileInput() {
           </label>
           <input type="file" id="input-img" onChange={handleSubmit} />
         </Button>
-        <Grid container direction="row" justifyContent="center" alignItems="flex">
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="flex"
+        >
           <div style={{ fontWeight: "650", fontSize: "18px" }}>
             CSV file must follow this format{" "}
-            <a href={samplescsv} stye={{fontWeight: "650",}} target="_blank">
-              <Button>
-                Download CSV
-              </Button>
+            <a href={samplescsv} stye={{ fontWeight: "650" }} target="_blank">
+              <Button>Download CSV</Button>
             </a>
-
           </div>
         </Grid>
-        <div style={{ textAlign: "center", fontWeight: "700", fontSize: "23px" }}>OR</div>
+        <div
+          style={{ textAlign: "center", fontWeight: "700", fontSize: "23px" }}
+        >
+          OR
+        </div>
         {errorMessage && (
           <Snackbar
             open={open}

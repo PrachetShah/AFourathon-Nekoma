@@ -93,12 +93,7 @@ export default function CreateStudent() {
   return (
     <>
       <div>
-        <Grid
-          container
-          direction="row"
-          justifyContent=""
-          alignItems="flex"
-        >
+        <Grid container direction="row" justifyContent="" alignItems="flex">
           <Grid
             container
             direction="row"
@@ -150,14 +145,9 @@ export default function CreateStudent() {
             Email: string in the format xxxxxx@domain_name.com
             Phone Number: */}
 
-            <Box
-              sx={{ mt: 3 }}
-            >
+            <Box sx={{ mt: 3 }}>
               <FileInput />
-              <ValidatorForm
-                component="form"
-                onSubmit={handleSubmit}
-              >
+              <ValidatorForm component="form" onSubmit={handleSubmit}>
                 <Grid
                   container
                   direction="row"
@@ -234,7 +224,6 @@ export default function CreateStudent() {
                 </Grid>
               </ValidatorForm>
             </Box>
-
           </Grid>
         </Grid>
       </div>
