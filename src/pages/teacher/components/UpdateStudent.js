@@ -184,7 +184,7 @@ export default function UpdateStudent() {
                                     marginBottom={1}
                                 >
                                     <TextValidator
-                                        label="Student ID"
+                                        //label="Student ID"
                                         margin="normal"
                                         validators={['required']}
                                         errorMessages={['this field is required']}
@@ -195,7 +195,7 @@ export default function UpdateStudent() {
                                         onChange={(e) => setId(e.target.value)}
                                     />
                                     <TextValidator
-                                        label="Name"
+                                        //label="Name"
                                         margin="normal"
                                         style={{ boxColor: "black", width: "60vh" }}
                                         validators={['required']}
@@ -206,7 +206,7 @@ export default function UpdateStudent() {
                                     />
                                     <TextValidator
                                         margin="normal"
-                                        label="Email"
+                                        //label="Email"
                                         validators={['required', 'isEmail']}
                                         errorMessages={['this field is required', 'email is not valid']}
                                         style={{ boxColor: "black", width: "60vh" }}
@@ -215,7 +215,7 @@ export default function UpdateStudent() {
                                         onChange={(e) => setEmail(e.target.value)}
                                     />
                                     <TextValidator
-                                        label="Phone Number"
+                                        //label="Phone Number"
                                         margin="normal"
                                         name="number"
                                         validators={['required']}
