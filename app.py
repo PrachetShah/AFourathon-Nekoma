@@ -48,6 +48,7 @@ with app.app_context():
     # db.session.commit()
     # print(num_rows_deleted_two, " Deleted")
 
+
 @app.route('/')
 def hello_world():
     return 'Hello World', 200
