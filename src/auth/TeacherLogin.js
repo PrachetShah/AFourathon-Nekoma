@@ -119,10 +119,7 @@ export default function TeacherLogin() {
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
             >
-              <Form
-                noValidate
-                sx={{ mt: 5 }}
-              >
+              <Form noValidate sx={{ mt: 5 }}>
                 <Field
                   as={TextField}
                   margin="normal"
