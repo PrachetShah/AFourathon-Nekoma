@@ -51,7 +51,7 @@ export default function HomePage() {
             <br />
             <Grid item sm={6} md={3}>
               {isToken ? (
-                <Link to="/allrecords">
+                <Link to="/allRecords">
                   <Button className="loginButton" variant="contained">
                     Records&nbsp;
                     <ArrowForwardIcon />
