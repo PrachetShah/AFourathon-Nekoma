@@ -29,13 +29,7 @@ function App() {
           <Route path="/allRecords" exact element={<><Navbar /><AllRecords /></>} />
           <Route path="/updateStudent/:id" exact element={<><Navbar /><UpdateStudent /></>} />
           {/* <Route path="*" element={<NotFound />} /> */}
-
-
           <Route path="*" element={<NotFound />} />
-
-
-
-
         </Routes>
       </Router>
     </div>
