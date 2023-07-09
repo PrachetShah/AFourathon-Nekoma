@@ -2,7 +2,7 @@
 Admin Only Library Management System application that can be run as a container on the cloud for creating/updating/deleting a student
 
 # Frontend can be accessed by 2 ways
-## 1. Through Docker
+### 1. Through Docker
 
 To run the container and application:
 
@@ -16,4 +16,5 @@ To stop the image running: <br>
 `docker stop <image_name>`
 afourathon
 
-## 2 using Create-react-app or through deployed site: https://nekoma-library-student-detail.netlify.app/
+### 2 Build with Create-react-app or through the deployed site: 
+Deployed Site: https://nekoma-library-student-detail.netlify.app/
