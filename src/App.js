@@ -23,15 +23,17 @@ function App() {
           <Route path="/" exact element={<><Navbar /><Homepage /></>} />
           <Route path="/login" exact element={<><TeacherLogin /></>} />
           <Route path="/register" exact element={<><TeacherRegister /></>} />
-          {isToken ?
-            (
-              <>
-                <Route path="/studentDetail" exact element={<><Navbar /><CreateStudent /></>} />
-                <Route path="/allRecords" exact element={<><Navbar /><AllRecords /></>} />
-                <Route path="/updateStudent/:id" exact element={<><Navbar /><UpdateStudent /></>} />
-                {/* <Route path="*" element={<NotFound />} /> */}
-              </>) :
-            (<Route path="*" element={<NotFound />} />)}
+
+
+          <Route path="/studentDetail" exact element={<><Navbar /><CreateStudent /></>} />
+          <Route path="/allRecords" exact element={<><Navbar /><AllRecords /></>} />
+          <Route path="/updateStudent/:id" exact element={<><Navbar /><UpdateStudent /></>} />
+          {/* <Route path="*" element={<NotFound />} /> */}
+
+
+          <Route path="*" element={<NotFound />} />
+
+
 
 
         </Routes>
