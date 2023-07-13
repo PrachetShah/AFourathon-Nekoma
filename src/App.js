@@ -16,16 +16,30 @@ function App() {
   if (token) {
     isToken = true;
   }
+
   return (
     <div className="App">
       <Router>
         <Routes>
+          {/* Route for the homepage */}
           <Route path="/" exact element={<><Navbar /><Homepage /></>} />
+
+          {/* Route for the teacher login */}
           <Route path="/login" exact element={<><TeacherLogin /></>} />
+
+          {/* Route for the teacher registration */}
           <Route path="/register" exact element={<><TeacherRegister /></>} />
+
+          {/* Route for creating a new student */}
           <Route path="/studentDetail" exact element={<><Navbar /><CreateStudent /></>} />
+
+          {/* Route for displaying all student records */}
           <Route path="/allRecords" exact element={<><Navbar /><AllRecords /></>} />
+
+          {/* Route for updating a student record */}
           <Route path="/updateStudent/:id" exact element={<><Navbar /><UpdateStudent /></>} />
+
+          {/* Route for handling any unknown paths */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
