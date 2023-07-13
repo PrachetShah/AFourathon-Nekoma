@@ -4,21 +4,21 @@ import "./Navbar.css";
 import SchoolIcon from "@mui/icons-material/School";
 
 const Navbar = () => {
-  let token = sessionStorage.getItem("token");
-  let isToken = false;
+  let token = sessionStorage.getItem("token"); // Retrieve token from session storage
+  let isToken = false; // Flag to check if token exists
   if (token) {
     isToken = true;
   }
-  const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false); // State to manage navbar open/close
+  const navigate = useNavigate(); // React Router navigation
 
   const toggleNavbar = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(!isOpen); // Toggle navbar open/close
   };
 
   const removeToken = () => {
-    sessionStorage.removeItem("token");
-    navigate("/login");
+    sessionStorage.removeItem("token"); // Remove token from session storage
+    navigate("/login"); // Navigate to login page
   };
 
   return (
@@ -33,7 +33,7 @@ const Navbar = () => {
         </Link>
         <div className={`navbar-menu ${isOpen ? "active" : ""}`}>
           <ul className="navbar-items">
-            {isToken ? (
+            {isToken ? ( // Check if token exists
               <>
                 <li className="navbar-item">
                   <Link to="/" className="navbar-link" onClick={toggleNavbar}>

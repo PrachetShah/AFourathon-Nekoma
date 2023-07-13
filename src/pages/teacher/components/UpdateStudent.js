@@ -18,18 +18,18 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 export default function UpdateStudent() {
   let token = sessionStorage.getItem("token");
   const { id } = useParams();
-  const [errorMessage, setErrorMessage] = useState(""); //for alert
-  const [open, setOpen] = useState(false);
-  const [idd, setId] = useState();
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [number, setNumber] = useState();
-  const history = useNavigate();
+  const [errorMessage, setErrorMessage] = useState(""); // Error message for alert
+  const [open, setOpen] = useState(false); // State to control Snackbar visibility
+  const [idd, setId] = useState(); // State for student ID
+  const [name, setName] = useState(); // State for student name
+  const [email, setEmail] = useState(); // State for student email
+  const [number, setNumber] = useState(); // State for student phone number
+  const history = useNavigate(); // React Router navigation
 
   const handleToClose = (event, reason) => {
     if ("clickaway" === reason) return;
     setOpen(false);
-    history("/allRecords");
+    history("/allRecords"); // Navigate to all records page
   };
   useEffect(() => {
     let updateStudent = async () => {

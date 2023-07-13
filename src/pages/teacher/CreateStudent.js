@@ -17,8 +17,8 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 export default function CreateStudent() {
   let token = sessionStorage.getItem("token");
-  const [errorMessage, setErrorMessage] = useState(""); //for alert
-  const [open, setOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message in the alert
+  const [open, setOpen] = useState(false); // State for controlling the opening/closing of the alert
   const [values, setValues] = useState({
     id: "",
     name: "",

@@ -21,12 +21,12 @@ import { Snackbar, IconButton } from "@mui/material";
 const theme = createTheme();
 
 export default function TeacherLogin() {
-  const [errorMessage, setErrorMessage] = useState("");
-  const [open, setOpen] = useState(false);
-  const history = useNavigate();
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
+  const [open, setOpen] = useState(false); // State for Snackbar open/close
+  const history = useNavigate(); // React Router navigation
 
   const handleToClose = () => {
-    setOpen(false);
+    setOpen(false); // Function to close the Snackbar
   };
 
   const initialValues = {
@@ -35,10 +35,10 @@ export default function TeacherLogin() {
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"), // Email validation
     password: Yup.string()
       .required("Password is required")
-      .min(6, "Password has to be minimum 6 characters"),
+      .min(6, "Password has to be minimum 6 characters"), // Password validation
   });
 
   const handleSubmit = async (formikSubmit) => {
@@ -58,22 +58,22 @@ export default function TeacherLogin() {
       );
 
       if (result.data.access_token) {
-        setErrorMessage("Logged in");
-        setOpen(true);
-        sessionStorage.setItem("token", result.data.access_token);
-        history("/");
+        setErrorMessage("Logged in"); // Set success message
+        setOpen(true); // Open Snackbar
+        sessionStorage.setItem("token", result.data.access_token); // Store token in session storage
+        history("/"); // Navigate to home page
       } else {
-        setErrorMessage("Please fill all details correctly");
-        setOpen(true);
+        setErrorMessage("Please fill all details correctly"); // Set error message for incomplete form
+        setOpen(true); // Open Snackbar
       }
     } catch (error) {
       if (error.response) {
         if (error.response.status === 401) {
-          setErrorMessage("Wrong credentials");
-          setOpen(true);
+          setErrorMessage("Wrong credentials"); // Set error message for wrong credentials
+          setOpen(true); // Open Snackbar
         } else if (error.response.status === 404) {
-          setErrorMessage("User does not exist");
-          setOpen(true);
+          setErrorMessage("User does not exist"); // Set error message for non-existent user
+          setOpen(true); // Open Snackbar
         }
       }
     }
@@ -91,7 +91,7 @@ export default function TeacherLogin() {
           sx={{
             backgroundImage: `url(${login})`,
             backgroundRepeat: "no-repeat",
-            backgroundSize:"80%",
+            backgroundSize: "80%",
             backgroundColor: (t) =>
               t.palette.mode === "light"
                 ? t.palette.grey[50]

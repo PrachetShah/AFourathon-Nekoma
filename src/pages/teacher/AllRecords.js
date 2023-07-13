@@ -29,14 +29,14 @@ const columns = [
 export default function AllRecords() {
   let token = sessionStorage.getItem("token");
   const [rows, setRows] = useState([]);
-  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
-  const [deleteStudentId, setDeleteStudentId] = useState(null);
-  const [stepsEnabled, setStepsEnabled] = useState(true);
-  const [initialStep] = useState(0);
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false); // State for delete confirmation dialog
+  const [deleteStudentId, setDeleteStudentId] = useState(null); // State for the ID of the student to be deleted
+  const [stepsEnabled, setStepsEnabled] = useState(true); // State to control if intro.js steps are enabled
+  const [initialStep] = useState(0); // Initial step for intro.js
   const [steps, setSteps] = useState([
     {
       element: ".header-cell",
-      intro: "Click on the column name to get more options!",
+      intro: "Click on the column name to get more options!", // Intro.js step for column header
     },
   ]);
 

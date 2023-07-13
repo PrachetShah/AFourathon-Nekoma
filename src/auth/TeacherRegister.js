@@ -21,8 +21,8 @@ import signup from "../assets/signup.svg";
 const theme = createTheme();
 
 export default function TeacherRegister() {
-  const [errorMessage, setErrorMessage] = useState(""); //for alert
-  const [open, setOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
+  const [open, setOpen] = useState(false); // State for Snackbar open/close
   const [values, setValues] = useState({
     password: "",
     email: "",
@@ -35,10 +35,12 @@ export default function TeacherRegister() {
     });
     console.log(values);
   };
+
   const handleToClose = (event, reason) => {
     if ("clickaway" === reason) return;
     setOpen(false);
   };
+
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -49,13 +51,13 @@ export default function TeacherRegister() {
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"), // Email validation
     password: Yup.string()
       .required("Password is required")
-      .min(6, "Password has to be minimum 6 characters"),
+      .min(6, "Password has to be minimum 6 characters"), // Password validation
   });
 
-  const history = useNavigate();
+  const history = useNavigate(); // React Router navigation
 
   const handleSubmit = async (formikSubmit) => {
     try {
@@ -74,18 +76,18 @@ export default function TeacherRegister() {
       );
       console.log(result.data);
       if (result.data.message === "Admin created successfully") {
-        setErrorMessage("Registration successful");
-        setOpen(true);
-        sessionStorage.setItem("token", result.data.token);
-        history("/login")
+        setErrorMessage("Registration successful"); // Set success message
+        setOpen(true); // Open Snackbar
+        sessionStorage.setItem("token", result.data.token); // Store token in session storage
+        history("/login"); // Navigate to login page
       }
     } catch (error) {
       console.log("Error" + error);
       if (error.response) {
         if (error.response.status == "401") {
           console.log(error.response.status);
-          setErrorMessage("Email already registered");
-          setOpen(true);
+          setErrorMessage("Email already registered"); // Set error message for already registered email
+          setOpen(true); // Open Snackbar
         }
       }
     }

@@ -9,23 +9,26 @@ import samplescsv from "../../../assets/template.xlsx";
 import "./FileInput.css";
 
 export default function FileInput() {
-  const [errorMessage, setErrorMessage] = useState(""); //for alert
-  const [open, setOpen] = useState(false);
-  const history = useNavigate();
-  let token = sessionStorage.getItem("token");
+  const [errorMessage, setErrorMessage] = useState(""); // Error message for alert
+  const [open, setOpen] = useState(false); // State to control Snackbar visibility
+  const history = useNavigate(); // React Router navigation
+  let token = sessionStorage.getItem("token"); // Retrieve token from session storage
+
   const handleToClose = (event, reason) => {
     if ("clickaway" === reason) return;
     setOpen(false);
-    history("/allRecords");
+    history("/allRecords"); // Navigate to all records page
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const file = event.target.files[0];
+    const file = event.target.files[0]; // Get selected file
     const formData = new FormData();
     formData.append("file", file);
     console.log(file);
     uploadFile(formData);
   };
+
   async function uploadFile(formData) {
     try {
       let result = await axios.post(url + "registerBulk", formData, {
@@ -49,12 +52,13 @@ export default function FileInput() {
         console.log(error.response.headers);
         if (error.response.status == "404") {
           console.log(error.response.status);
-          setErrorMessage("file not recieved");
+          setErrorMessage("file not received");
           setOpen(true);
         }
       }
     }
   }
+
   return (
     <div>
       <Grid container direction="row" justifyContent="center" alignItems="flex">
